@@ -4,9 +4,11 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/btn_text.xml" value="0.23425925925925925" />
+        <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.23055555555555557" />
         <entry key="app/src/main/res/drawable/ic_study.xml" value="0.23425925925925925" />
-        <entry key="app/src/main/res/layout/activity_add_habit.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.26984639029130586" />
+        <entry key="app/src/main/res/layout/activity_add_habit.xml" value="0.26588845654993515" />
+        <entry key="app/src/main/res/layout/fragment_blank.xml" value="0.16531531531531532" />
+        <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.26636767431167396" />
       </map>
     </option>
   </component>
