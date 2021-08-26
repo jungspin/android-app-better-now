@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/navCalender"
+        android:title="캘린더"
+        android:icon="@drawable/ic_calender"/>
+
+    <item android:id="@+id/navDiary"
+        android:title="일기"
+        android:icon="@drawable/ic_diary"/>
+
+    <item android:id="@+id/navHabit"
+        android:title="습관"
+        android:icon="@drawable/ic_habit"/>
+
+    <item android:id="@+id/navStatus"
+        android:title="현황"
+        android:icon="@drawable/ic_status"/>
+
+    <item android:id="@+id/navMypage"
+        android:title="마이페이지"
+        android:icon="@drawable/ic_mypage"/>
+
+</menu>
