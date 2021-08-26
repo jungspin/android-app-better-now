@@ -78,7 +78,7 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
                     selectedFragment = new StatusFragment();
                     break;
                 case R.id.navMypage:
-                    selectedFragment = new MypageFragment();
+                    selectedFragment = new MypageFragment(mContext);
                     break;
 
             }
