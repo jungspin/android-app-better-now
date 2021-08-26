@@ -78,27 +78,3 @@ implementation'in.nashapp.androidsummernote:androidsummernote:1.0.5'
 - DiaryService
 
 ### DTO 필요한 경우 , 기타 클래스의 경우 생성시 재논의
-
-## Spring
-
-### model
-- Habit
-- Calender
-- Diary
-
-### Service
-- HabitService
-- CalenderService
-- DiaryService
-
-### Controller
-- HabitController
-- CalenderController
-- DiaryController
-
-### Repository
-- HabitRepository
-- CalenderRepository
-- DiaryRepository
-
-### DTO 필요한 경우 , 기타 클래스의 경우 생성시 재논의
