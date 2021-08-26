@@ -28,4 +28,6 @@ public class TempActivity extends Activity {
         String date = getIntent().getStringExtra("date");
         tvCalender.setText(date);
     }
+
+
 }

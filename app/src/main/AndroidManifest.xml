@@ -15,8 +15,7 @@
             android:name=".view.habit.AddHabitActivity"
             android:exported="true" />
         <activity
-            android:name=".view.diary.TestActivity"
-            android:theme="@style/Theme.mDialog" />
+            android:name=".view.diary.TestActivity" />
         <activity
             android:name=".view.calender.TempActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
