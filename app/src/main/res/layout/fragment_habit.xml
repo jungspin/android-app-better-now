@@ -13,20 +13,13 @@
         android:layout_marginTop="10dp"
         >
 
-        <Button
-            android:id="@+id/btnClose"
-            android:layout_width="50dp"
-            android:layout_height="60dp"
-            android:backgroundTint="@color/white"
-            android:text="X"
-            android:textColor="@color/black"
-            android:textSize="25dp" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="30dp"
             android:textStyle="bold"
-            android:text="습관 추가" />
+            android:text="습관 추가"
+            android:layout_marginStart="30dp"/>
     </androidx.appcompat.widget.LinearLayoutCompat>
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
