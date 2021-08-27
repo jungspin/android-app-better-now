@@ -12,6 +12,7 @@ import android.widget.ImageView;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
+import com.cos.better.config.MyDate;
 
 import jp.wasabeef.richeditor.RichEditor;
 
@@ -79,8 +80,8 @@ public class WriteDiaryActivity extends AppCompatActivity implements InitSetting
         mEditor.setEditorFontSize(22);
         mEditor.setPadding(10, 10, 10, 10);
 
-        String[] selectedDate = getIntent().getStringArrayExtra("selectedDate");
-        mEditor.setPlaceholder(selectedDate[1]+"월 " + selectedDate[2] + "일의 기록");
+        MyDate myDate = (MyDate) getIntent().getSerializableExtra("selectedDate");
+        mEditor.setPlaceholder(myDate.getMMonth()+"월 " + myDate.getMDay() + "일의 기록");
 
         findViewById(R.id.actionHeading2).setOnClickListener(v-> {
             Log.d(TAG, "init: actionHeading2");

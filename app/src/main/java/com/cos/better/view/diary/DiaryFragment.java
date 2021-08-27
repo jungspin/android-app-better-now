@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.cos.better.config.InitSetting;
+import com.cos.better.config.MyDate;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 
@@ -35,8 +36,7 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
 
 
-    private  String[] selectedDate;
-    Calendar today = Calendar.getInstance();
+    private MyDate myDate = new MyDate();
 
 
     public DiaryFragment(HomeActivity mContext) {
@@ -76,14 +76,13 @@ public class DiaryFragment extends Fragment implements InitSetting {
     @Override
     public void initLr() {
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
-            selectedDate = (date.getYear()+"-"+(date.getMonth()+1)+"-"+date.getDay()).split("-");
-            Log.d(TAG, "selectedDate: " + selectedDate[2]);
-            mtvToday.setText(selectedDate[1] + "월 " + selectedDate[2] + "일" + "은 어땠나요?");
+            myDate = myDate.getSelectedDate(date.getYear(), (date.getMonth()+1), date.getDay());
+            mtvToday.setText(myDate.getMMonth() + "월 " + myDate.getMDay() + "일" + "은 어땠나요?");
         });
 
         btnLinkWrite.setOnClickListener(v->{
             Intent intent = new Intent(getActivity(), WriteDiaryActivity.class);
-            intent.putExtra("selectedDate", selectedDate);
+            intent.putExtra("selectedDate", myDate);
             getActivity().startActivity(intent);
         });
 
@@ -91,11 +90,11 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
     @Override
     public void initSetting() {
-        calendarView.setSelectedDate(today);
-        selectedDate = getSelectedDate();
+        calendarView.setSelectedDate(myDate.getToday());
+        myDate = myDate.getSelectedDate(myDate.getToday());
 
-        Log.d(TAG, "none selectedDate: " + selectedDate[2]);
-        mtvToday.setText(selectedDate[1] + "월 " + selectedDate[2] + "일" + "은 어땠나요?");
+        Log.d(TAG, "none selectedDate: " + myDate.toString());
+        mtvToday.setText(myDate.getMMonth() + "월 " + myDate.getMDay() + "일" + "은 어땠나요?");
 
     }
 
@@ -106,9 +105,7 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
 
 
-    private String[] getSelectedDate(){
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd", Locale.KOREA);
-        selectedDate = sdf.format(today.getTime()).split("-");
-        return selectedDate;
-    }
+
+
+
 }
