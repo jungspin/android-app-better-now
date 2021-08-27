@@ -43,11 +43,12 @@ tools:context=".view.habit.AddHabitActivity">
         tools:layout_editor_absoluteX="294dp" />
 </androidx.appcompat.widget.LinearLayoutCompat>
 <androidx.appcompat.widget.LinearLayoutCompat
-    android:layout_marginTop="20dp"
+    android:layout_marginTop="50dp"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="150dp">
     <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btnHabitText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="독서"
@@ -76,21 +77,35 @@ tools:context=".view.habit.AddHabitActivity">
 </androidx.appcompat.widget.LinearLayoutCompat>
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="80dp">
     <RadioGroup
         android:id="@+id/radioGroup"
         android:checkedButton="@+id/radio_button_1"
+        android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <RadioButton
-            android:id="@+id/radio_button_1"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="매일"/>
+            android:id="@+id/rBtnEveryDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:checked="true"
+            android:text="매일" />
+
         <RadioButton
-            android:id="@+id/radio_button_2"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:id="@+id/rBtnEveryWeek"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:text="매주"/>
+
+        <RadioButton
+            android:id="@+id/rBtnSetDay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
             android:text="매주"/>
 
     </RadioGroup>
@@ -98,8 +113,45 @@ tools:context=".view.habit.AddHabitActivity">
 </androidx.appcompat.widget.LinearLayoutCompat>
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="30dp"
+    >
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:text="알림설정"
+        android:gravity="center_vertical"
+        android:textSize="15dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:drawableStart="@drawable/ic_notification"
+        />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnAddAlarm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:fabCustomSize="30dp"
+        android:src="@drawable/ic_add"
+        android:layout_gravity="center"
+        android:layout_marginLeft="200dp"/>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnComplete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:backgroundTint="@color/beige"
+            android:textSize="25dp"
+            android:text="완료"/>
+
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 </androidx.appcompat.widget.LinearLayoutCompat>

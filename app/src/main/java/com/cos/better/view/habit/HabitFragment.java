@@ -1,66 +1,108 @@
 package com.cos.better.view.habit;
 
+import android.app.Activity;
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.cos.better.R;
+import com.cos.better.config.InitSetting;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link HabitFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
-public class HabitFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public HabitFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment HabitFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static HabitFragment newInstance(String param1, String param2) {
-        HabitFragment fragment = new HabitFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
+public class HabitFragment extends Fragment implements InitSetting{
+    private View view;
+    private AppCompatButton btnHealth, btnReading, btnLife, btnStudy, btnMoney, btnOther;
+    private static final String TAG = "habitFragment";
+    private Activity activity;
+    private Context mContext;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_habit, container, false);
+        view = inflater.inflate(R.layout.fragment_habit, container, false);
+
+        init();
+        initLr();
+
+        return view;
+
+    }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+
+        if(context instanceof Activity)
+            activity = (Activity) context;
+    }
+
+    @Override
+    public void init() {
+        btnHealth = view.findViewById(R.id.btnHealth);
+        btnReading = view.findViewById(R.id.btnReading);
+        btnLife = view.findViewById(R.id.btnLife);
+        btnStudy = view.findViewById(R.id.btnStudy);
+        btnMoney = view.findViewById(R.id.btnMoney);
+        btnOther = view.findViewById(R.id.btnOther);
+    }
+
+    @Override
+    public void initLr() {
+        btnHealth.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext,AddHabitActivity.class);
+            intent.putExtra("btnHealth",btnHealth.getText());
+            intent.putExtra("categoryName","btnHealth");
+            mContext.startActivity(intent);
+        });
+
+        btnReading.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext,AddHabitActivity.class);
+            intent.putExtra("btnReading",btnReading.getText());
+            intent.putExtra("categoryName","btnReading");
+            mContext.startActivity(intent);
+        });
+
+        btnLife.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext,AddHabitActivity.class);
+            intent.putExtra("btnLife",btnLife.getText());
+            intent.putExtra("categoryName","btnLife");
+            mContext.startActivity(intent);
+        });
+
+        btnStudy.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext,AddHabitActivity.class);
+            intent.putExtra("btnStudy",btnStudy.getText());
+            intent.putExtra("categoryName","btnStudy");
+            mContext.startActivity(intent);
+        });
+
+        btnMoney.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext,AddHabitActivity.class);
+            intent.putExtra("btnMoney",btnMoney.getText());
+            intent.putExtra("categoryName","btnMoney");
+            mContext.startActivity(intent);
+        });
+
+        btnOther.setOnClickListener(v -> {
+            Intent intent = new Intent(mContext,AddHabitActivity.class);
+            intent.putExtra("btnOther",btnOther.getText());
+            intent.putExtra("categoryName","btnOther");
+            mContext.startActivity(intent);
+        });
+    }
+
+    @Override
+    public void initData() {
+
     }
 }
