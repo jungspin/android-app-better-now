@@ -50,7 +50,7 @@ public class CalenderFragment extends Fragment {
             Log.d(TAG, "onCreateView: month : " + (date.getMonth()+1));
             String selectedDate =  date.getYear()+"-"+(date.getMonth()+1)+"-"+date.getDay();
             Log.d(TAG, "onCreateView: selectedDate : " + selectedDate);
-            Intent intent = new Intent(getActivity(), TempActivity.class);
+            Intent intent = new Intent(getActivity(), AddScheduleActivity.class);
             intent.putExtra("date", selectedDate); // getDate 는 date 타입
             getActivity().startActivity(intent);
 

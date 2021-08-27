@@ -19,7 +19,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
 
-public class MypageFragment extends Fragment  {
+public class MypageFragment extends Fragment {
 
     private static final String TAG = "MypageFragment";
     private MypageFragment mFragment = this;
@@ -55,6 +55,8 @@ public class MypageFragment extends Fragment  {
 
         new TabLayoutMediator(tabMypage, vpContainer, (tab, position) -> {}).attach();
 
+        tabMypage.setTabRippleColorResource(R.color.beige);
+        tabMypage.setTabTextColors(R.color.dark_navy, R.color.brown);
         tabMypage.getTabAt(0).setIcon(R.drawable.ic_calender);
         tabMypage.getTabAt(0).setText("일정");
 
@@ -69,7 +71,13 @@ public class MypageFragment extends Fragment  {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
 
+
+
+    }
 
 
 }

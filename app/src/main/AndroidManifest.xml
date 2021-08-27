@@ -11,13 +11,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
+        <activity android:name=".view.diary.IntentTestActivity"></activity>
         <activity
             android:name=".view.habit.AddHabitActivity"
             android:exported="true" />
+        <activity android:name=".view.diary.WriteDiaryActivity" />
         <activity
-            android:name=".view.diary.TestActivity" />
-        <activity
-            android:name=".view.calender.TempActivity"
+            android:name=".view.calender.AddScheduleActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity android:name=".view.HomeActivity">
             <intent-filter>

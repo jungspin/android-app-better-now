@@ -12,6 +12,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">@color/beige</item>
         <!-- Customize your theme here. -->
+        <item name="android:background">@color/beige</item>
 
     </style>
     <!-- for popup activity-->
