@@ -6,7 +6,18 @@
     android:layout_width="400dp"
     android:layout_height="500dp"
     android:layout_gravity="center"
-    tools:context=".view.calender.TempActivity">
+    tools:context=".view.calender.AddScheduleActivity">
+
+<!--    <TimePicker-->
+<!--        android:id="@+id/timePicker"-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:timePickerMode="spinner" />-->
+
+<!--    <NumberPicker-->
+<!--        android:layout_width="match_parent"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent" />-->
 
     <TextView
         android:id="@+id/tvCalender"

@@ -47,8 +47,6 @@ dependencies {
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
     // richeditor
     implementation 'jp.wasabeef:richeditor-android:2.0.0'
-    // laser-native-editor
-    implementation 'com.github.irshulx:laser-native-editor:3.0.3'
     // material-calendarview
     implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
     // androidsummernote
