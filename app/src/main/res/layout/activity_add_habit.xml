@@ -17,9 +17,11 @@ tools:context=".view.habit.AddHabitActivity">
         android:id="@+id/btnClose"
         android:layout_width="50dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/beige"
         android:text="X"
         android:textColor="@color/black"
+        android:layout_marginEnd="20dp"
+
         android:textSize="25dp"
         />
 
@@ -29,13 +31,13 @@ tools:context=".view.habit.AddHabitActivity">
         android:text="습관 추가"
         android:textSize="30dp"
         android:textStyle="bold"
-        tools:layout_editor_absoluteX="58dp" />
+        />
 
     <Button
         android:id="@+id/btnBack"
         android:layout_width="80dp"
         android:layout_height="60dp"
-        android:backgroundTint="@color/white"
+        android:backgroundTint="@color/beige"
         android:text="이전"
         android:textSize="20dp"
         android:layout_marginStart="130dp"
@@ -52,6 +54,7 @@ tools:context=".view.habit.AddHabitActivity">
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="독서"
+        android:backgroundTint="@color/beige"
         android:layout_marginStart="20dp"
         android:background="@drawable/btn_text"
         />

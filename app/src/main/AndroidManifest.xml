@@ -12,14 +12,18 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
         <activity
-            android:name=".view.habit.AddHabitActivity"
+            android:name=".view.status.habit.HabitStatus"
             android:exported="true" />
         <activity
-            android:name=".view.diary.TestActivity" />
+            android:name=".view.status.category.CategoryStatus"
+            android:exported="true" />
+        <activity
+            android:name=".view.habit.AddHabitActivity"
+            android:exported="true" />
+        <activity android:name=".view.diary.TestActivity" />
         <activity
             android:name=".view.calender.TempActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
-
         <activity android:name=".view.HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
