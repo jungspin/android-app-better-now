@@ -17,6 +17,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
         <activity android:name=".view.calender.AddScheduleActivity"></activity>
+        <activity
+            android:name=".view.status.StatusActivity"
+            android:exported="true" />
         <activity android:name=".view.diary.IntentTestActivity" />
         <activity
             android:name=".view.status.habit.HabitStatus"
