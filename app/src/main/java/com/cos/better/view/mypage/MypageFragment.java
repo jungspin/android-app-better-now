@@ -63,7 +63,7 @@ public class MypageFragment extends Fragment {
         tabMypage.getTabAt(1).setIcon(R.drawable.ic_diary);
         tabMypage.getTabAt(1).setText("일기");
 
-        tabMypage.getTabAt(2).setIcon(R.drawable.ic_habit);
+        tabMypage.getTabAt(2).setIcon(R.drawable.sample_habit_ex);
         tabMypage.getTabAt(2).setText("습관");
 
 

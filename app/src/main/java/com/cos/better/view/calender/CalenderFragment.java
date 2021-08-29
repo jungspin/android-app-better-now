@@ -12,21 +12,17 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 
 import com.cos.better.config.InitSetting;
-import com.cos.better.config.MyCalender;
-import com.cos.better.config.MyDate;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
-import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+import com.cos.better.view.calender.decorator.DefaultDecorator;
+import com.cos.better.view.calender.decorator.TodayDecorator;
+import com.cos.better.view.calender.decorator.SundayDecorator;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
-import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
 import java.util.Calendar;
-import java.util.Date;
 
 
 public class CalenderFragment extends Fragment implements InitSetting {
@@ -36,12 +32,15 @@ public class CalenderFragment extends Fragment implements InitSetting {
     private Activity activity;
     private View view;
 
-    private SlidingUpPanelLayout splAddSchedule;
-    private MaterialCalendarView calendarView, splCalendarView;
-    private TextView tvAddSchedule;
-    private FloatingActionButton fabAddSchedule;
 
-    MyDate myDate = new MyDate();
+    private MaterialCalendarView calendarView;
+
+
+
+
+    Calendar cal = Calendar.getInstance();
+    int month = cal.get(Calendar.MONTH)+1;
+    String output = cal.get(Calendar.YEAR) + "년 " + month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일";
 
 
     @Override
@@ -57,6 +56,8 @@ public class CalenderFragment extends Fragment implements InitSetting {
     public CalenderFragment(HomeActivity mContext) {
         // Required empty public constructor
     }
+
+
 
 
     @Override
@@ -76,55 +77,36 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     @Override
     public void init() {
-        splAddSchedule = view.findViewById(R.id.splAddSchedule);
-        tvAddSchedule = view.findViewById(R.id.tvAddSchedule);
         calendarView = view.findViewById(R.id.calendarView);
-        splCalendarView = view.findViewById(R.id.splCalendarView);
-        fabAddSchedule = view.findViewById(R.id.fabAddSchedule);
 
     }
 
     @Override
     public void initLr() {
-        // 사용자가 다른 날짜를 클릭했을 때
+        // 사용자가 다른 날짜를 클릭
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
 
-//            calendarView.setOnTitleClickListener(v->{
-//                // 여기서 원하는 년/월 로 갈 수 있겠음
-//                Log.d(TAG, "onCreateView: 쿨릭");
-//            });
+            cal.set(date.getYear(), (date.getMonth()+1), date.getDay());
+            output = cal.get(Calendar.YEAR)+"년 "+ cal.get(Calendar.MONTH)+ "월 "+cal.get(Calendar.DAY_OF_MONTH)+"일";
+            Log.d(TAG, "initLr: selectedDate : " + output);
 
-            String selectedDate =  date.getYear()+"년 "+(date.getMonth()+1)+"월 "+date.getDay()+"일";
-            tvAddSchedule.setText(selectedDate);
+            Intent intent = new Intent(mContext, ShowScheduleActivity.class);
+            intent.putExtra("date", output);
+            startActivity(intent);
+
+
+
         });
 
-
-        tvAddSchedule.setOnClickListener(v->{
-            splAddSchedule.setPanelState(SlidingUpPanelLayout.PanelState.EXPANDED);
-
-
-            //splCalendarView.setSelectedDate(date);
-        });
-        
-        fabAddSchedule.setOnClickListener(v->{
-            Log.d(TAG, "initLr: 일정 추가 버튼 클릭");
-        });
 
     }
 
     @Override
     public void initSetting() {
-
-
-        calendarView.addDecorator(new MyCalender());
-        //calendarView.setSelectedDate(myDate.getToday()); // 날짜 선택시 둥글게? 되게함
-        myDate = myDate.getSelectedDate(myDate.getToday());
-        tvAddSchedule.setText(myDate.getMYear() + "년 " + myDate.getMMonth()+"월 " + myDate.getMDay()+"일");
-
-
-
-
-
+        calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext));
+        
+        // 처음 앱 실행시 Calender
+        Log.d(TAG, "initSetting: 처음 실행 시 :" + output);
     }
 
     @Override

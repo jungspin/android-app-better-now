@@ -12,7 +12,7 @@
 
     <item android:id="@+id/navHabit"
         android:title="습관"
-        android:icon="@drawable/ic_habit"/>
+        android:icon="@drawable/sample_habit_ex"/>
 
     <item android:id="@+id/navStatus"
         android:title="현황"
