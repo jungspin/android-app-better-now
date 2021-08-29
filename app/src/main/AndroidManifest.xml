@@ -11,7 +11,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
-        <activity android:name=".view.diary.IntentTestActivity"></activity>
+        <activity
+            android:name=".view.status.StatusActivity"
+            android:exported="true" />
+        <activity android:name=".view.diary.IntentTestActivity" />
         <activity
             android:name=".view.status.habit.HabitStatus"
             android:exported="true" />

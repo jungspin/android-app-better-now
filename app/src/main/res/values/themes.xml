@@ -20,4 +20,11 @@
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>
+
+    <style name="CustomRadioButton" parent="Theme.AppCompat.Light">
+        <!-- 선택했을 때 내부 원 색상-->
+        <item name ="colorAccent">@color/brown</item>
+        <!-- 선택 안 됐을 때 테두리 색상-->
+        <item name = "colorControlNormal">@color/brown</item>
+    </style>
 </resources>

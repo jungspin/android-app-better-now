@@ -1,16 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
     tools:context=".view.mypage.MyHabitFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <com.prolificinteractive.materialcalendarview.MaterialCalendarView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="my habit"
-        android:gravity="center"
-        android:textSize="50dp"/>
+        android:layout_height="wrap_content"
+        app:mcv_calendarMode="week"
+        app:mcv_arrowColor="@color/dark_yellow"
+        app:mcv_selectionColor="@color/dark_yellow"/>
 
-</FrameLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="160dp"
+        android:text="테스트"
+        android:textSize="40dp"/>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>
