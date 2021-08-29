@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cos.better">
 
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" /> <!-- 카메라 권한 -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" /> <!-- 파일 읽기 권한 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" /> <!-- 파일 쓰기 권한 -->
+    <uses-feature
+        android:name="android.hardware.camera"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -11,9 +16,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
-        <activity
-            android:name=".view.status.StatusActivity"
-            android:exported="true" />
+        <activity android:name=".view.calender.AddScheduleActivity"></activity>
         <activity android:name=".view.diary.IntentTestActivity" />
         <activity
             android:name=".view.status.habit.HabitStatus"
@@ -25,9 +28,8 @@
         <activity
             android:name=".view.habit.AddHabitActivity"
             android:exported="true" />
-        <activity android:name=".view.diary.TestActivity" />
         <activity
-            android:name=".view.calender.TempActivity"
+            android:name=".view.calender.ShowScheduleActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity android:name=".view.HomeActivity">
             <intent-filter>

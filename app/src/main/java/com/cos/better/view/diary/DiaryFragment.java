@@ -18,6 +18,7 @@ import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 
 import com.google.android.material.textview.MaterialTextView;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.text.SimpleDateFormat;
@@ -37,6 +38,9 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
 
     private MyDate myDate = new MyDate();
+    Calendar cal = Calendar.getInstance();
+    int month = cal.get(Calendar.MONTH)+1;
+    String output = cal.get(Calendar.YEAR) + "년 " + month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일";
 
 
     public DiaryFragment(HomeActivity mContext) {
@@ -76,13 +80,14 @@ public class DiaryFragment extends Fragment implements InitSetting {
     @Override
     public void initLr() {
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
-            myDate = myDate.getSelectedDate(date.getYear(), (date.getMonth()+1), date.getDay());
-            mtvToday.setText(myDate.getMMonth() + "월 " + myDate.getMDay() + "일" + "은 어땠나요?");
+            cal.set(date.getYear(), (date.getMonth()+1), date.getDay());
+            mtvToday.setText(month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일" + "은 어땠나요?");
         });
 
         btnLinkWrite.setOnClickListener(v->{
             Intent intent = new Intent(getActivity(), WriteDiaryActivity.class);
-            intent.putExtra("selectedDate", myDate);
+            String initData = month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일의 기록";
+            intent.putExtra("initData", initData);
             getActivity().startActivity(intent);
         });
 
@@ -92,6 +97,7 @@ public class DiaryFragment extends Fragment implements InitSetting {
     public void initSetting() {
         calendarView.setSelectedDate(myDate.getToday());
         myDate = myDate.getSelectedDate(myDate.getToday());
+
 
         Log.d(TAG, "none selectedDate: " + myDate.toString());
         mtvToday.setText(myDate.getMMonth() + "월 " + myDate.getMDay() + "일" + "은 어땠나요?");
