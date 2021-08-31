@@ -3,6 +3,7 @@ package com.cos.better.view;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.FrameLayout;
@@ -15,6 +16,8 @@ import com.cos.better.view.habit.HabitFragment;
 import com.cos.better.view.mypage.MypageFragment;
 import com.cos.better.view.status.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 public class HomeActivity extends AppCompatActivity implements InitSetting {
 
@@ -28,6 +31,8 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        isLogin();
 
         init();
         initLr();
@@ -100,5 +105,16 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
     @Override
     public void initData() {
 
+    }
+
+    private void isLogin(){
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user==null){
+            Intent intent = new Intent(mContext, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            Log.d(TAG, "isLogin: " + user.getDisplayName());
+        }
     }
 }

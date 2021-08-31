@@ -68,8 +68,6 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
     }
 
-
-
     @Override
     public void init() {
         mtvToday = getView().findViewById(R.id.mtvToday);

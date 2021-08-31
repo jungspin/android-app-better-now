@@ -2,4 +2,10 @@
     <string name="app_name">Better</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Facebook application ID and custom URL scheme (app ID prefixed by 'fb'). -->
+    <string name="facebook_application_id" translatable="false">121231376826987</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb121231376826987</string>
 </resources>
+
+

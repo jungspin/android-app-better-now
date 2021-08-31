@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "511417163484",
+    "project_id": "better-22ce3",
+    "storage_bucket": "better-22ce3.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:511417163484:android:f88e21240b421f01779e19",
+        "android_client_info": {
+          "package_name": "com.cos.better"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "511417163484-7b3p8d3vqcd17nmrucs2dmf1cu442q7v.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.cos.better",
+            "certificate_hash": "eb7d1f75f6d9613d3e5d408094b0badf58aa6425"
+          }
+        },
+        {
+          "client_id": "511417163484-4kk33vpaptqtnovqnrch8uev2ktrc11d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDqw3M9SItSRqKenSkFnUrHD-mpClENIvU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "511417163484-4kk33vpaptqtnovqnrch8uev2ktrc11d.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

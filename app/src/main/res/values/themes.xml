@@ -21,6 +21,13 @@
         <item name="windowActionBar">false</item>
     </style>
 
+    <style name="Theme.login" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+
+    <style name="Theme.AppCompat.NumberPicker"/>
+
     <style name="CustomRadioButton" parent="Theme.AppCompat.Light">
         <!-- 선택했을 때 내부 원 색상-->
         <item name ="colorAccent">@color/brown</item>
