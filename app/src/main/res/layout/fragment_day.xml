@@ -1,14 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.appcompat.widget.LinearLayoutCompat xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
     tools:context=".view.habit.dayFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <ToggleButton
+            android:layout_marginStart="20dp"
+            android:id="@+id/toggleBtnMonday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textOn="월"
+            android:textOff="월"
+            android:background="@drawable/circle_btn_off"
+            />
 
-</FrameLayout>
+        <ToggleButton
+            android:id="@+id/toggleBtnTuesday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_btn_off"
+            android:textOff="화"
+            android:textOn="화" />
+        <ToggleButton
+            android:id="@+id/toggleBtnWednesday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textOn="수"
+            android:textOff="수"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_btn_off"
+            />
+        <ToggleButton
+            android:id="@+id/toggleBtnThursday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textOn="목"
+            android:textOff="목"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_btn_off"
+            />
+        <ToggleButton
+            android:id="@+id/toggleBtnFriday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textOn="금"
+            android:textOff="금"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_btn_off"
+            />
+        <ToggleButton
+            android:id="@+id/toggleBtnSaturday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textOn="토"
+            android:textOff="토"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_btn_off"
+            />
+        <ToggleButton
+            android:id="@+id/toggleBtnSunday"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:textOn="일"
+            android:textOff="일"
+            android:layout_marginStart="5dp"
+            android:background="@drawable/circle_btn_off"
+            />
+    </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
+</androidx.appcompat.widget.LinearLayoutCompat>

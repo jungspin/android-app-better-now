@@ -16,7 +16,17 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
-        <activity android:name=".view.calender.AddScheduleActivity"></activity>
+        <activity
+            android:name=".view.status.StatusDetailActivity"
+            android:theme="@style/Widget.AppCompat.ActionBar"
+            android:exported="true" />
+        <activity
+            android:name=".view.habit.AddHabitActivity2"
+            android:exported="true" />
+        <activity
+            android:name=".view.habit.MonthDialog"
+            android:exported="true" />
+        <activity android:name=".view.calender.AddScheduleActivity" />
         <activity
             android:name=".view.status.StatusActivity"
             android:exported="true" />

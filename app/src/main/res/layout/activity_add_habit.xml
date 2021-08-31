@@ -13,23 +13,14 @@ tools:context=".view.habit.AddHabitActivity">
     android:layout_marginTop="10dp"
     >
 
-    <Button
-        android:id="@+id/btnClose"
-        android:layout_width="50dp"
-        android:layout_height="60dp"
-        android:backgroundTint="@color/beige"
-        android:text="X"
-        android:textColor="@color/black"
-        android:layout_marginEnd="20dp"
 
-        android:textSize="25dp"
-        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="습관 추가"
         android:textSize="30dp"
+        android:layout_marginStart="30dp"
         android:textStyle="bold"
         />
 
@@ -81,6 +72,7 @@ tools:context=".view.habit.AddHabitActivity">
 <androidx.appcompat.widget.LinearLayoutCompat
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     android:layout_marginTop="80dp">
     <RadioGroup
         android:id="@+id/rgHabit"
@@ -115,6 +107,25 @@ tools:context=".view.habit.AddHabitActivity">
             android:text="매월"/>
 
     </RadioGroup>
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:id="@+id/lyDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        >
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnSelectDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="날짜 추가"
+            android:textSize="15dp"
+            android:layout_marginStart="260dp"/>
+    </androidx.appcompat.widget.LinearLayoutCompat>
+    <FrameLayout
+        android:id="@+id/WeekContainer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+    </FrameLayout>
 
 </androidx.appcompat.widget.LinearLayoutCompat>
 <androidx.appcompat.widget.LinearLayoutCompat

@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
 
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -12,16 +13,20 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
 import com.cos.better.view.HomeActivity;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import org.w3c.dom.Text;
@@ -30,14 +35,16 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
 
     private static final String TAG = "AddHabitActivity";
     private Context mContext = this;
-    private Button btnClose, btnBack;
+    private Button btnBack;
     private AppCompatButton btnHabitText,btnComplete;
     private FloatingActionButton btnAddAlarm;
     private RadioGroup rgHabit;
-    private LinearLayoutCompat container;
+    private LinearLayoutCompat container,lyDate;
     private int alarmHour = -1, alarmMinute = -1;
     private int alarmCount=0;
-
+    private dayFragment dayFragment;
+    private MonthDialog monthDialog;
+    private MaterialButton btnSelectDate;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,7 +57,7 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
 
     public void createAlarmTv(int alarmHour, int alarmMinute){
         //텍스트뷰 생성
-        TextView timeView = new TextView(this);
+        TextView timeView = new TextView(mContext);
 
         if(alarmHour >= 10){
             if(alarmMinute >=10)
@@ -72,22 +79,32 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
         timeView.setLayoutParams(lp);
         container.addView(timeView);
     }
+    public void createMonthTextView(){
+        TextView tvSelectMonth = new TextView(mContext);
+
+    }
 
     @Override
     public void init() {
-        btnClose = findViewById(R.id.btnClose);
+        monthDialog = new MonthDialog(mContext);
+        dayFragment = new dayFragment(mContext);
         btnBack = findViewById(R.id.btnBack);
         btnHabitText = findViewById(R.id.btnHabitText);
         btnAddAlarm = findViewById(R.id.btnAddAlarm);
         btnComplete = findViewById(R.id.btnComplete);
         rgHabit = findViewById(R.id.rgHabit);
         container = findViewById(R.id.container);
+        lyDate = findViewById(R.id.lyDate);
+        btnSelectDate =findViewById(R.id.btnSelectDate);
     }
 
     @Override
     public void initLr() {
-        btnClose.setOnClickListener(v ->{
-          finish();
+        btnSelectDate.setOnClickListener(v->{
+            monthDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+            monthDialog.setCanceledOnTouchOutside(true);
+            monthDialog.setCancelable(true);
+            monthDialog.show();
         });
         btnBack.setOnClickListener(v ->{
             finish();
@@ -99,14 +116,28 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
                 switch (checkedId){
                     case R.id.rBtnEveryDay:
                         Log.d(TAG, "onCheckedChanged: 매일");
-
-
+                        getSupportFragmentManager().beginTransaction()
+                                .remove(dayFragment)
+                                .commit();
+                        lyDate.setVisibility(View.GONE);
                         break;
                     case R.id.rBtnEveryWeek:
                         Log.d(TAG, "onCheckedChanged: 매주");
+                        getSupportFragmentManager().beginTransaction()
+                                .replace(R.id.WeekContainer,dayFragment)
+                                .commit();
+                        lyDate.setVisibility(View.GONE);
                         break;
                     case R.id.rBtnSetDay:
                         Log.d(TAG, "onCheckedChanged: 매달");
+                        getSupportFragmentManager().beginTransaction()
+                                .remove(dayFragment)
+                                .commit();
+                        lyDate.setVisibility(View.VISIBLE);
+                        monthDialog.getWindow().setLayout(WindowManager.LayoutParams.MATCH_PARENT,WindowManager.LayoutParams.WRAP_CONTENT);
+                        monthDialog.setCanceledOnTouchOutside(true);
+                        monthDialog.setCancelable(true);
+                        monthDialog.show();
                         break;
                 }
             }

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Button;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
@@ -18,6 +19,7 @@ public class CategoryStatus extends AppCompatActivity implements InitSetting {
     private Category6mFragment category6mFragment;
     private CategoryAllFragment categoryAllFragment;
     private TabLayout tabStatus;
+    private Button btnBack;
 
 
     @Override
@@ -40,10 +42,15 @@ public class CategoryStatus extends AppCompatActivity implements InitSetting {
         category6mFragment = new Category6mFragment();
         categoryAllFragment = new CategoryAllFragment();
         tabStatus = findViewById(R.id.tabStatus);
+        btnBack = findViewById(R.id.btnBack);
     }
 
     @Override
     public void initLr() {
+
+        btnBack.setOnClickListener(v ->{
+            finish();
+        });
         tabStatus.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {

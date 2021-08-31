@@ -20,6 +20,7 @@ import com.cos.better.R;
 import com.cos.better.config.InitSetting;
 import com.cos.better.dto.StatusDto;
 import com.cos.better.view.habit.AddHabitActivity;
+import com.cos.better.view.habit.AddHabitActivity2;
 import com.cos.better.view.status.adapter.StatusAdapter;
 import com.cos.better.view.status.category.CategoryStatus;
 import com.cos.better.view.status.habit.HabitStatus;
@@ -32,7 +33,9 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class StatusFragment extends Fragment implements InitSetting {
@@ -45,8 +48,8 @@ public class StatusFragment extends Fragment implements InitSetting {
     private RecyclerView.LayoutManager layoutManager;
     private StatusAdapter statusAdapter;
     private FloatingActionButton fabAdd;
-
-    ;
+    private TextView tvStatusIcon;
+    private List<StatusDto> lists = new ArrayList();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,16 +76,20 @@ public class StatusFragment extends Fragment implements InitSetting {
     public void init() {
         rvStatus = view.findViewById(R.id.rvStatus);
         fabAdd = view.findViewById(R.id.fabAdd);
+        tvStatusIcon = view.findViewById(R.id.tvStatusIcon);
     }
 
     @Override
     public void initLr() {
         fabAdd.setOnClickListener(v->{
-            Intent intent = new Intent(mContext, AddHabitActivity.class);
+            Intent intent = new Intent(mContext, AddHabitActivity2.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             mContext.startActivity(intent);
         });
-
+        tvStatusIcon.setOnClickListener(v ->{
+            Intent intent = new Intent(mContext,StatusActivity.class);
+            mContext.startActivity(intent);
+        });
 
     }
 
@@ -98,6 +105,11 @@ public class StatusFragment extends Fragment implements InitSetting {
     @Override
     public void initData() {
         //테스트
-        statusAdapter.addItem(new StatusDto(R.drawable.ic_health,"매일 운동 15분",4,"매일"));
+        statusAdapter.addItem(new StatusDto(R.drawable.ic_health,"매일 운동 15분",4,"운동","매일"));
+        //statusAdapter.addItem(new StatusDto(R.drawable.ic_book,"독서 10페이지",2,"주 3회"));
+
+        lists.add(new StatusDto(R.drawable.ic_book,"독서 10페이지",2,"독서","주 3회"));
+        lists.add(new StatusDto(R.drawable.ic_health,"걷기 10분",28,"운동","주 5회"));
+        statusAdapter.addItems(lists);
     }
 }

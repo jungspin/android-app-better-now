@@ -14,12 +14,6 @@
         app:mcv_arrowColor="@color/dark_yellow"
         app:mcv_selectionColor="@color/dark_yellow"/>
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="160dp"
-        android:text="테스트"
-        android:textSize="40dp"/>
-
 
 
 </androidx.appcompat.widget.LinearLayoutCompat>
