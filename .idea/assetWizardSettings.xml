@@ -23,7 +23,7 @@
                                 <PersistentState>
                                   <option name="values">
                                     <map>
-                                      <entry key="url" value="file:$USER_HOME$/Library/Android/sdk/icons/material/materialicons/arrow_left/baseline_arrow_left_24.xml" />
+                                      <entry key="url" value="jar:file:/C:/Program%20Files/Android/Android%20Studio/plugins/android/lib/android.jar!/images/material/icons/materialicons/check/baseline_check_24.xml" />
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -33,8 +33,8 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_back" />
-                            <entry key="sourceFile" value="/C:\Users\jungspin\Desktop\android-project-better-now-master\AppProject" />
+                            <entry key="outputName" value="ic_calender_check" />
+                            <entry key="sourceFile" value="C:\Users\jungspin\Desktop\android-project-better-now-master\AppProject" />
                           </map>
                         </option>
                       </PersistentState>

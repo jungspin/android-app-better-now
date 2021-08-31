@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.widget.TextView;
 
 import com.cos.better.R;
@@ -24,6 +25,7 @@ public class IntentTestActivity extends AppCompatActivity {
 
         tvTest = findViewById(R.id.tvTest);
         String diary = getIntent().getStringExtra("diary");
-        tvTest.setText(diary);
+
+        tvTest.setText( Html.fromHtml(diary));
     }
 }
