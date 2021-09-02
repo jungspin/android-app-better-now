@@ -3,14 +3,18 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.diary.WriteDiaryActivity">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/constraintLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/ivCancel"
@@ -30,20 +34,83 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
-    <in.nashapp.androidsummernote.Summernote
-        android:id="@+id/summernote"
+    <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_weight="8"
+        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
+        tools:layout_editor_absoluteX="-16dp">
+
+
+
+<!--        <com.google.android.material.textfield.TextInputLayout-->
+<!--            android:id="@+id/textInputLayout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="0dp"-->
+<!--            android:layout_weight="5"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@+id/ivPhoto">-->
+
+<!--            <com.google.android.material.textfield.TextInputEditText-->
+<!--                android:id="@+id/tfContent"-->
+<!--                android:background="@color/beige"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="match_parent"-->
+<!--                android:gravity="top|left"-->
+<!--                android:hint="오늘 하루 있었던 일을 기록해보세요"-->
+<!--                android:inputType="textMultiLine"-->
+<!--                android:maxHeight="5.0dip"-->
+<!--                android:minWidth="10.0dip"-->
+<!--                android:scrollHorizontally="false" />-->
+<!--        </com.google.android.material.textfield.TextInputLayout>-->
+
+
+        <ImageView
+            android:id="@+id/ivPhoto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+        <jp.wasabeef.richeditor.RichEditor
+            android:id="@+id/editor"
+            android:backgroundTint="@color/beige"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
+
+
+        </jp.wasabeef.richeditor.RichEditor>
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
 
 
 
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/writeDiaryToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/Theme.AppCompat.Light.NoActionBar">
+        <ImageView
+            android:id="@+id/ivInsertPhoto"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_gravity="right"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/ic_photo_ex"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
 
+
+    </androidx.appcompat.widget.Toolbar>
 
 
 

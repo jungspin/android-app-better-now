@@ -11,14 +11,16 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-// 임시 입니다.
+// 자바 캘린더랑 이름이 겹쳐서..
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Calender {
+public class CalenderObj {
     private String title; // 일정이름
-    private List<SimpleDateFormat> calendarDayList;
-
+    private List<CalendarDay> calendarDayList;
+    private String startTime;
+    private String endTime;
+    private String user;
 
 }

@@ -18,10 +18,6 @@ public class SundayDecorator implements DayViewDecorator {
 
     private Calendar calendar = Calendar.getInstance();
 
-
-
-
-
     @Override
     public boolean shouldDecorate(CalendarDay day) {
 
