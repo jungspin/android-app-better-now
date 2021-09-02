@@ -3,10 +3,12 @@ package com.cos.better.view.calender;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,18 +16,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
+import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 import com.cos.better.view.calender.decorator.DefaultDecorator;
 import com.cos.better.view.calender.decorator.EventDecorator;
 import com.cos.better.view.calender.decorator.TodayDecorator;
 import com.cos.better.view.calender.decorator.SundayDecorator;
+import com.cos.better.viewModel.CalenderListViewModel;
+import com.cos.better.viewModel.DiaryListViewModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class CalenderFragment extends Fragment implements InitSetting {
@@ -37,9 +45,15 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     private MaterialCalendarView calendarView;
 
+    CustomDate customDate = new CustomDate();
+    private CalenderDayDTO dayDTO;
+    private ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+    private DiaryListViewModel vm;
+    private CalenderListViewModel clv;
+
     Calendar cal = Calendar.getInstance();
     int month = cal.get(Calendar.MONTH)+1;
-    String output = cal.get(Calendar.YEAR) + "년 " + month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일";
+    CalendarDay today;
 
 
     @Override
@@ -53,6 +67,10 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
 
     public CalenderFragment(HomeActivity mContext) {
+        // Required empty public constructor
+    }
+
+    public CalenderFragment() {
         // Required empty public constructor
     }
 
@@ -83,11 +101,19 @@ public class CalenderFragment extends Fragment implements InitSetting {
         calendarView.setOnDateChangedListener((widget, date, selected) -> {
             cal.set(date.getYear(), date.getMonth(), date.getDay());
             month = cal.get(Calendar.MONTH)+1;
-            output = cal.get(Calendar.YEAR)+"년 "+ month + "월 "+cal.get(Calendar.DAY_OF_MONTH)+"일";
-            Log.d(TAG, "initLr: selectedDate : " + output);
+
+            dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
+            customDate.setYear(cal.get(Calendar.YEAR));
+            customDate.setMonth(month);
+            customDate.setDay(cal.get(Calendar.DAY_OF_MONTH));
+
+            today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
+            Log.d(TAG, "initLr: selectedDate dayDTO : " + customDate.toString());
+
+            //CalendarDay.from(2021, 8, 25);
 
             Intent intent = new Intent(mContext, ShowScheduleActivity.class);
-            intent.putExtra("date", output);
+            intent.putExtra("date", customDate);
             startActivity(intent);
         });
 
@@ -97,22 +123,64 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     @Override
     public void initSetting() {
-//        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
-//        calendarDayList.add(CalendarDay.today());
-//        calendarDayList.add(CalendarDay.from(2021, 7, 18));
-//        calendarDayList.add(CalendarDay.from(2021, 7, 15));
-//        Log.d(TAG, "initSetting:calendarDayList " + calendarDayList.size());
+        vm = new ViewModelProvider((HomeActivity)mContext).get(DiaryListViewModel.class);
+        clv = new ViewModelProvider((HomeActivity)mContext).get(CalenderListViewModel.class);
         calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext)/*,new EventDecorator(mContext, calendarDayList)*/);
 
         
         // 처음 앱 실행시 Calender
-        Log.d(TAG, "initSetting: 처음 실행 시 :" + cal);
-        Log.d(TAG, "initSetting: 처음 실행 시 :" + output);
+        //dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
+
+        customDate.setYear(cal.get(Calendar.YEAR));
+        customDate.setMonth(month);
+        customDate.setDay(cal.get(Calendar.DAY_OF_MONTH));
+
+        Log.d(TAG, "initSetting: 처음 실행 customDate : " + customDate.toString());
+
     }
 
     @Override
     public void initData() {
+        vm.findAllDiary();
+        vm.getDiaryList().observe((HomeActivity)mContext, data ->{
+            if (data.size() != 0){
+                for (int i=0; i<data.size();i++){
+                    calendarDayList.add(data.get(i).getToday());
+                }
+                List<CalendarDay> newList = deleteDup(calendarDayList);
+                Log.d(TAG, "initData getDiaryList: " + newList.size());
+                calendarView.addDecorators(new EventDecorator(mContext, newList));
+            } else {
+                Log.d(TAG, "initData: 데이터 없음");
+            }
+          
+        });
+        today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
+        Log.d(TAG, "initData customdate: " + today);
+//        clv.findAllSchedule(CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay()));
+//        clv.getMdCalenderList().observe((HomeActivity)mContext, data ->{
+//            if(data != null){
+//                List<CalendarDay> calendarDays = new ArrayList<>();
+//                for(int i=0; i<data.size();i++){
+//                    CalendarDay day = data.get(i).getCalendarDayList().get(i);
+//                    calendarDays.add(day);
+//                }
+//                List<CalendarDay> newCalenderList = deleteDup(calendarDays);
+//                Log.d(TAG, "initData: getMdCalenderList : " + newCalenderList.size());
+//                calendarView.addDecorators(new EventDecorator(mContext, newCalenderList));
+//            } else {
+//                Log.d(TAG, "initData: getMdCalenderList 데이터 없음");
+//            }
+//        });
 
+    }
+
+    private List<CalendarDay> deleteDup(List<CalendarDay> originalList){
+        List<CalendarDay> newList = new ArrayList<>();
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            newList = originalList.stream().distinct().collect(Collectors.toList());
+        }
+        return newList;
     }
 
 

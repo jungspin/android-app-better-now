@@ -18,6 +18,10 @@ import com.cos.better.view.status.StatusFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity implements InitSetting {
 
@@ -27,10 +31,17 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
     private FrameLayout fragmentContainer;
     private BottomNavigationView bottomNavigation;
 
+    //DiaryViewModel vm = new ViewModelProvider(mContext).get(DiaryViewModel.class);
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+
+
 
         isLogin();
 
@@ -117,4 +128,9 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
             Log.d(TAG, "isLogin: " + user.getDisplayName());
         }
     }
+
+
+
+
+
 }

@@ -48,8 +48,6 @@ dependencies {
     implementation 'sun.bob:mcalendarview:1.0.0'
     // cosmocalendar
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
-    // richeditor
-    implementation 'jp.wasabeef:richeditor-android:2.0.0'
     // material-calendarview
     implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
     // circleimageview
@@ -62,6 +60,8 @@ dependencies {
     implementation 'gun0912.ted:tedpermission:2.2.3'
     // androidsummernote
     implementation 'in.nashapp.androidsummernote:androidsummernote:1.0.5'
+    // richeditor
+    implementation 'jp.wasabeef:richeditor-android:2.0.0'
     // glide
     implementation 'com.github.bumptech.glide:glide:4.12.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
@@ -74,8 +74,6 @@ dependencies {
     implementation 'com.facebook.android:facebook-android-sdk:11.2.0'
 
     def lifecycle_version = "2.4.0-alpha03"
-    def arch_version = "2.1.0"
-
     // ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version"
     // LiveData

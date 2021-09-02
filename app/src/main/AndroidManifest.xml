@@ -39,8 +39,12 @@
             android:name=".view.habit.AddHabitActivity"
             android:exported="true" />
         <activity
+            android:name=".view.habit.AddHabitActivity2"
+            android:exported="true" />
+        <activity
             android:name=".view.calender.ShowScheduleActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
+            android:theme="@style/Theme.mDialog" />
+        <activity android:name=".view.status.StatusDetailActivity"/>
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

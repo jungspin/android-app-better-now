@@ -63,13 +63,28 @@
             android:text="시간을 입력해주세요"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
-
-
-        <TimePicker
-            android:id="@+id/tpSelectTime"
+        <androidx.appcompat.widget.LinearLayoutCompat
             android:layout_width="wrap_content"
-            android:layout_height="150dp"
-            android:timePickerMode="spinner" />
+            android:layout_height="wrap_content">
+
+            <TimePicker
+                android:id="@+id/tpSelectTime"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+
+                android:timePickerMode="spinner" />
+
+            <TimePicker
+                android:id="@+id/tpSelectTime2"
+                android:layout_width="wrap_content"
+                android:layout_height="150dp"
+                android:timePickerMode="spinner" />
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+
+
 
 
         <CheckBox

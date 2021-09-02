@@ -16,7 +16,11 @@ import com.bumptech.glide.Glide;
 import com.cos.better.R;
 import com.cos.better.model.Diary;
 import com.cos.better.view.HomeActivity;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,8 +33,14 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
 
     // 컬렉션 데이터 셋팅 해야함
     public void addItems(List<Diary> diaryList){
+        Log.d(TAG, "addItems: " + diaryList.size());
         this.diaryList = diaryList;
-        //notifyDataSetChanged();
+        notifyDataSetChanged();
+    }
+
+    public void addItem(Diary diary){
+        //Log.d(TAG, "addItems: " + diaryList.size());
+        this.diaryList.add(diary);
     }
 
     @NonNull
@@ -45,6 +55,7 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
 
     @Override
     public int getItemCount() {
+        Log.d(TAG, "getItemCount: " + diaryList.size());
         return diaryList.size();
     }
 
@@ -71,14 +82,18 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
         }
 
         public void setItem(Diary diary){
-            tvDate.setText(diary.getCreated());
-            tvTitle.setText(diary.getTitle());
+            Log.d(TAG, "setItem: " + diary.getUser());
+            CalendarDay cal = diary.getToday();
+            String setTime = cal.getYear() + "년 " + (cal.getMonth()+1) + "월 " + cal.getDay() + "일";
+
+            tvDate.setText(setTime);
+            tvTitle.setText(diary.getContent());
 
             Glide
                     .with(itemView)
                     .load("https://picsum.photos/100/100")
                     .centerCrop()
-                    .placeholder(R.drawable.ic_launcher_background) // 사진 없을 때
+                    .placeholder(R.drawable.img_diary_default) // 사진 없을 때
                     .into(ivPhoto);
 
         }
@@ -89,4 +104,7 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
             });
         }
     }
+
+
+
 }

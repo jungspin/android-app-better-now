@@ -16,8 +16,7 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        >
+        android:layout_height="match_parent">
 
         <ImageView
             android:id="@+id/ivCancel"
@@ -127,6 +126,29 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
+        <CheckBox
+            android:id="@+id/isAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="17dp"
+            android:text="알림 설정"
+            android:buttonTint="@color/brown"
+            android:textColor="@color/brown"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline9" />
+
+        <TextView
+            android:id="@+id/tvLetMeAlert"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="설정하신 시간에 알림을 드릴게요"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/isAlert" />
+
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline5"
             android:layout_width="wrap_content"
@@ -140,6 +162,13 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             app:layout_constraintGuide_begin="219dp" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_begin="461dp" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
@@ -210,11 +239,26 @@
                 android:layout_marginBottom="20dp"/>
 
 
-            <TimePicker
-                android:id="@+id/tpSelectTime"
+            <androidx.appcompat.widget.LinearLayoutCompat
                 android:layout_width="wrap_content"
-                android:layout_height="150dp"
-                android:timePickerMode="spinner" />
+                android:layout_height="wrap_content">
+
+                <TimePicker
+                    android:id="@+id/tpSelectStartTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+
+                    android:timePickerMode="spinner" />
+
+                <TimePicker
+                    android:id="@+id/tpSelectEndTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="150dp"
+                    android:timePickerMode="spinner" />
+
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
 
             <CheckBox
