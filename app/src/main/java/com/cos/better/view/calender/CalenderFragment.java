@@ -97,12 +97,12 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     @Override
     public void initSetting() {
-//        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
-//        calendarDayList.add(CalendarDay.today());
-//        calendarDayList.add(CalendarDay.from(2021, 7, 18));
-//        calendarDayList.add(CalendarDay.from(2021, 7, 15));
-//        Log.d(TAG, "initSetting:calendarDayList " + calendarDayList.size());
-        calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext)/*,new EventDecorator(mContext, calendarDayList)*/);
+        ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+        calendarDayList.add(CalendarDay.today());
+        calendarDayList.add(CalendarDay.from(2021, 7, 18));
+        calendarDayList.add(CalendarDay.from(2021, 7, 15));
+        Log.d(TAG, "initSetting:calendarDayList " + calendarDayList.size());
+        calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext),new EventDecorator(mContext, calendarDayList));
 
         
         // 처음 앱 실행시 Calender

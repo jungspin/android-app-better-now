@@ -1,8 +1,10 @@
 package com.cos.better.view.habit;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.LinearLayoutCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
@@ -25,30 +27,50 @@ import android.widget.Toast;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
-import com.cos.better.view.HomeActivity;
+
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import org.w3c.dom.Text;
 
-public class AddHabitActivity extends AppCompatActivity implements InitSetting {
+import java.util.HashMap;
+import java.util.Map;
+
+public class AddHabitActivity extends AppCompatActivity implements InitSetting, dayFragment.MyWeekListener{
 
     private static final String TAG = "AddHabitActivity";
     private Context mContext = this;
-    private Button btnBack;
+
+    private TextInputEditText etTitle;
     private AppCompatButton btnHabitText,btnComplete;
     private FloatingActionButton btnAddAlarm;
     private RadioGroup rgHabit;
     private LinearLayoutCompat container,lyDate;
-    private int alarmHour = -1, alarmMinute = -1;
-    private int alarmCount=0;
+    private int alarmHour = -1, alarmMinute = -1, alarmCount=0, cycleCode = 0;
     private dayFragment dayFragment;
     private MonthDialog monthDialog;
-    private MaterialButton btnSelectDate;
+    private MaterialButton btnSelectDate, btnBack;
+    private Map<String, Object> habit = new HashMap<>();
+    private FirebaseFirestore db;
+    private String category;
+    private String habitTitle;
+    private String weekData, dayData, notification="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_habit);
+
+//        AddHabitViewModel addHabitViewModel = new ViewModelProvider(this).get(AddHabitViewModel.class);
+//
+//        addHabitViewModel.init();
+//        addHabitViewModel.getHabit().observe(this,changeHabit ->{
+//
+//        });
         init();
         initData();
         initLr();
@@ -60,15 +82,22 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
         TextView timeView = new TextView(mContext);
 
         if(alarmHour >= 10){
-            if(alarmMinute >=10)
-            timeView.setText(alarmHour+":"+alarmMinute);
-            else
-                timeView.setText(alarmHour+":0"+alarmMinute);
+            if(alarmMinute >=10) {
+                timeView.setText(alarmHour + ":" + alarmMinute);
+                notification += alarmHour + ":" + alarmMinute+" ";
+            }
+            else {
+                timeView.setText(alarmHour + ":0" + alarmMinute);
+                notification += alarmHour + ":0" + alarmMinute+" ";
+            }
         }else if(alarmHour <10 ){
-            if(alarmMinute >=10)
-                timeView.setText("0"+alarmHour+":"+alarmMinute);
+            if(alarmMinute >=10) {
+                timeView.setText("0" + alarmHour + ":" + alarmMinute);
+                notification += "0" + alarmHour + ":" + alarmMinute+" ";
+            }
             else{
                 timeView.setText("0"+alarmHour+":0"+alarmMinute);
+                notification += "0"+alarmHour+":0"+alarmMinute+" ";
             }
         }
         timeView.setTextSize(20);
@@ -79,14 +108,16 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
         timeView.setLayoutParams(lp);
         container.addView(timeView);
     }
-    public void createMonthTextView(){
-        TextView tvSelectMonth = new TextView(mContext);
-
-    }
 
     @Override
     public void init() {
-        monthDialog = new MonthDialog(mContext);
+        monthDialog = new MonthDialog(mContext, new MonthDialog.MyDayListener() {
+            @Override
+            public void onReceivedData(String data) {
+                dayData = data;
+                Log.d(TAG, "onReceivedData: "+dayData);
+            }
+        });
         dayFragment = new dayFragment(mContext);
         btnBack = findViewById(R.id.btnBack);
         btnHabitText = findViewById(R.id.btnHabitText);
@@ -96,6 +127,8 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
         container = findViewById(R.id.container);
         lyDate = findViewById(R.id.lyDate);
         btnSelectDate =findViewById(R.id.btnSelectDate);
+        btnComplete = findViewById(R.id.btnComplete);
+        etTitle = findViewById(R.id.etTitle);
     }
 
     @Override
@@ -115,6 +148,8 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId){
                     case R.id.rBtnEveryDay:
+                        weekData ="";
+                        cycleCode = 0;
                         Log.d(TAG, "onCheckedChanged: 매일");
                         getSupportFragmentManager().beginTransaction()
                                 .remove(dayFragment)
@@ -122,6 +157,7 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
                         lyDate.setVisibility(View.GONE);
                         break;
                     case R.id.rBtnEveryWeek:
+                        cycleCode = 1;
                         Log.d(TAG, "onCheckedChanged: 매주");
                         getSupportFragmentManager().beginTransaction()
                                 .replace(R.id.WeekContainer,dayFragment)
@@ -129,6 +165,8 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
                         lyDate.setVisibility(View.GONE);
                         break;
                     case R.id.rBtnSetDay:
+                        weekData ="";
+                        cycleCode = 2;
                         Log.d(TAG, "onCheckedChanged: 매달");
                         getSupportFragmentManager().beginTransaction()
                                 .remove(dayFragment)
@@ -155,24 +193,76 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting {
                         createAlarmTv(alarmHour, alarmMinute);
                     }
                     else{
-                        //토스트메시지
+                        Toast.makeText(mContext, "알람은 5개까지만 설정이 가능합니다", Toast.LENGTH_SHORT).show();
                     }
                     alarmCount++;
-                    Log.d(TAG, "onTimeSet: "+alarmCount);
+                    //Log.d(TAG, "onTimeSet: "+alarmCount);
                 }
             },alarmHour,alarmMinute,true);
             timePickerDialog.show();
 
+        });
+
+        btnComplete.setOnClickListener(v -> {
+            habitTitle = etTitle.getText().toString();
+            if(!habitTitle.equals("")) {
+                finish();
+            }else{
+                Toast.makeText(mContext, "습관을 입력하세요", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     @Override
     public void initData() {
         Intent intent = getIntent();
-       String categoryName = intent.getStringExtra("categoryName");
-       String category = intent.getStringExtra(categoryName);
+       category = intent.getStringExtra("categoryName");
        btnHabitText.setText(category);
     }
 
+    public void addDb(){
+        db = FirebaseFirestore.getInstance();
+        habit.put("category",category);
+        habit.put("habitTitle",habitTitle);
+        habit.put("cycleCode",cycleCode);
+        if(cycleCode == 0)
+            habit.put("cycle","매일");
+        else if(cycleCode ==1 ) {
+            Log.d(TAG, "addDb: "+weekData);
+            habit.put("cycle", weekData);
+        }
+        else if(cycleCode ==2) {
+            Log.d(TAG, "addDb: "+dayData);
+            habit.put("cycle", dayData);
+        }
+        habit.put("notification",notification);
 
+        db.collection("habits")
+                .add(habit)
+                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                    public void onSuccess(DocumentReference documentReference) {
+                        Log.d(TAG, "onSuccess: "+documentReference.getId());
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.d(TAG, "onFailure: "+e);
+                    }
+                });
+    }
+
+    @Override
+    public void onReceivedData(String data) {
+        weekData = data;
+        Log.d(TAG, "onReceivedData: "+weekData);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy: activity onDestroy"+weekData);
+        addDb();
+    }
 }

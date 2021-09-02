@@ -39,43 +39,37 @@ public class AddHabitActivity2 extends AppCompatActivity implements InitSetting 
     public void initLr() {
         btnHealth.setOnClickListener(v -> {
             Intent intent = new Intent(mContext,AddHabitActivity.class);
-            intent.putExtra("btnHealth",btnHealth.getText());
-            intent.putExtra("categoryName","btnHealth");
+            intent.putExtra("categoryName","건강");
             mContext.startActivity(intent);
         });
 
         btnReading.setOnClickListener(v -> {
             Intent intent = new Intent(mContext,AddHabitActivity.class);
-            intent.putExtra("btnReading",btnReading.getText());
-            intent.putExtra("categoryName","btnReading");
+            intent.putExtra("categoryName","독서");
             mContext.startActivity(intent);
         });
 
         btnLife.setOnClickListener(v -> {
             Intent intent = new Intent(mContext,AddHabitActivity.class);
-            intent.putExtra("btnLife",btnLife.getText());
-            intent.putExtra("categoryName","btnLife");
+            intent.putExtra("categoryName","생활습관");
             mContext.startActivity(intent);
         });
 
         btnStudy.setOnClickListener(v -> {
             Intent intent = new Intent(mContext,AddHabitActivity.class);
-            intent.putExtra("btnStudy",btnStudy.getText());
-            intent.putExtra("categoryName","btnStudy");
+            intent.putExtra("categoryName","공부");
             mContext.startActivity(intent);
         });
 
         btnMoney.setOnClickListener(v -> {
             Intent intent = new Intent(mContext,AddHabitActivity.class);
-            intent.putExtra("btnMoney",btnMoney.getText());
-            intent.putExtra("categoryName","btnMoney");
+            intent.putExtra("categoryName","자산관리");
             mContext.startActivity(intent);
         });
 
         btnOther.setOnClickListener(v -> {
             Intent intent = new Intent(mContext,AddHabitActivity.class);
-            intent.putExtra("btnOther",btnOther.getText());
-            intent.putExtra("categoryName","btnOther");
+            intent.putExtra("categoryName","기타");
             mContext.startActivity(intent);
         });
 

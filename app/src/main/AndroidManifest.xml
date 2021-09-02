@@ -24,10 +24,12 @@
             android:name=".view.calender.SelectDateActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity android:name=".view.calender.AddScheduleActivity" />
+        <activity android:name=".view.status.StatusDetailActivity"/>
         <activity
             android:name=".view.status.StatusActivity"
             android:exported="true" />
         <activity android:name=".view.diary.IntentTestActivity" />
+        <activity android:name=".view.habit.AddHabitActivity2" />
         <activity
             android:name=".view.status.habit.HabitStatus"
             android:exported="true" />

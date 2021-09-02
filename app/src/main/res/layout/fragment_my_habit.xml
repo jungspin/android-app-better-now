@@ -8,11 +8,16 @@
     tools:context=".view.mypage.MyHabitFragment">
 
     <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+        android:id="@+id/mcView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:mcv_calendarMode="week"
         app:mcv_arrowColor="@color/dark_yellow"
         app:mcv_selectionColor="@color/dark_yellow"/>
+<androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/rvHabit"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"/>
 
 
 
