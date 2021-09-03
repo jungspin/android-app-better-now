@@ -7,6 +7,7 @@ import android.net.Uri;
 
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
+import java.io.Serializable;
 import java.net.URL;
 import java.sql.Timestamp;
 
@@ -20,8 +21,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Diary {
+public class Diary implements Serializable {
     private CalendarDay today;
+    private String title;
     private String content;
     private String user;
     private Timestamp created;

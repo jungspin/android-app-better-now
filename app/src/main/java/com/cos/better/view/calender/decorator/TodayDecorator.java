@@ -18,7 +18,11 @@ import java.util.Calendar;
 public class TodayDecorator implements DayViewDecorator {
     private static final String TAG = "TodayDecorator";
 
+    private Drawable drawable;
+
     public TodayDecorator(Context mContext) {
+       // drawable = mContext.getResources().getDrawable(R.drawable.calender_set_today);
+
     }
 
     @Override
@@ -30,6 +34,7 @@ public class TodayDecorator implements DayViewDecorator {
 
     @Override
     public void decorate(DayViewFacade view) {
+        //view.setSelectionDrawable(drawable);
         //view.addSpan(new ForegroundColorSpan(Color.BLACK));
         view.addSpan(new StyleSpan(Typeface.BOLD));
         view.addSpan(new RelativeSizeSpan(1.2f));

@@ -1,7 +1,10 @@
 package com.cos.better.view.mypage;
 
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -26,18 +29,25 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 public class MyDiaryFragment extends Fragment implements InitSetting {
 
     private static final String TAG = "MyDiaryFragment";
-    private HomeActivity mContext;
+    private Context mContext;
+    private Activity activity;
+    private View view;
     private MypageFragment mFragment;
 
     private RecyclerView rvDiaries;
     private MypageDiaryAdapter mypageDiaryAdapter;
 
-    DiaryListViewModel vm;
+    private DiaryListViewModel vm;
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
 
-    public MyDiaryFragment(HomeActivity mContext) {
-        // Required empty public constructor
+        if(context instanceof Activity)
+            activity = (Activity) context;
     }
+
 
 
     public MyDiaryFragment(MypageFragment mFragment) {
@@ -48,10 +58,11 @@ public class MyDiaryFragment extends Fragment implements InitSetting {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: ");
-        View view = inflater.inflate(R.layout.fragment_my_diary, container, false);
+        view = inflater.inflate(R.layout.fragment_my_diary, container, false);
 
-        rvDiaries = (RecyclerView) view.findViewById(R.id.rvDiaries);
 
+
+        init();
         initAdapter();
         initSetting();
         initData();
@@ -61,6 +72,7 @@ public class MyDiaryFragment extends Fragment implements InitSetting {
 
     @Override
     public void init() {
+        rvDiaries = (RecyclerView) view.findViewById(R.id.rvDiaries);
 
     }
 
@@ -74,7 +86,7 @@ public class MyDiaryFragment extends Fragment implements InitSetting {
         Log.d(TAG, "initAdapter: ");
 
         rvDiaries.setLayoutManager(new LinearLayoutManager(mContext, RecyclerView.VERTICAL, false));
-        mypageDiaryAdapter = new MypageDiaryAdapter();
+        mypageDiaryAdapter = new MypageDiaryAdapter((HomeActivity) mContext);
         rvDiaries.setAdapter(mypageDiaryAdapter);
 //        mypageDiaryAdapter.registerAdapterDataObserver(new RecyclerView.AdapterDataObserver() {
 //            public void onItemRangeInserted(int positionStart, int itemCount) {

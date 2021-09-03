@@ -6,8 +6,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 
+import com.airbnb.lottie.Lottie;
 import com.cos.better.R;
 import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract;
@@ -26,6 +28,7 @@ public class LoginActivity extends AppCompatActivity  {
 
 
 
+
     // [START auth_fui_create_launcher]
     // See: https://developer.android.com/training/basics/intents/result
     private final ActivityResultLauncher<Intent> signInLauncher = registerForActivityResult(
@@ -37,10 +40,24 @@ public class LoginActivity extends AppCompatActivity  {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        //createSignInIntent();
-        login();
 
+        //createSignInIntent();
+
+        setContentView(R.layout.activity_login);
+
+
+        showProgressDialog();
+            login();
+
+
+
+
+
+    }
+
+    private void showProgressDialog(){
+        new LoadingFragment().newInstance().
+                show(getSupportFragmentManager(),"");
     }
 
 
@@ -58,6 +75,7 @@ public class LoginActivity extends AppCompatActivity  {
 //            Log.d(TAG, "getEmail: " + user.getEmail());
 //            Log.d(TAG, "getProviderId: " + user.getProviderId());
 //            Log.d(TAG, "getUid: " + user.getUid());
+
 
             Intent intent = new Intent(mContext, HomeActivity.class);
             startActivity(intent);

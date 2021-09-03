@@ -21,6 +21,7 @@ import com.cos.better.config.InitSetting;
 import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.model.Diary;
 import com.cos.better.viewModel.DiaryController;
+import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.gun0912.tedpermission.PermissionListener;
@@ -40,6 +41,7 @@ public class WriteDiaryActivity extends AppCompatActivity implements InitSetting
 
     private ImageView ivSave, ivCancel, ivPhoto, ivInsertPhoto;
     private RichEditor mEditor;
+    private TextInputEditText tfTitle;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
@@ -68,8 +70,8 @@ public class WriteDiaryActivity extends AppCompatActivity implements InitSetting
         ivSave = findViewById(R.id.ivSave);
         ivCancel = findViewById(R.id.ivCancel);
         mEditor = findViewById(R.id.editor);
-        ivPhoto = findViewById(R.id.ivPhoto);
         ivInsertPhoto = findViewById(R.id.ivInsertPhoto);
+        tfTitle = findViewById(R.id.tfTitle);
 
 
     }
@@ -90,6 +92,7 @@ public class WriteDiaryActivity extends AppCompatActivity implements InitSetting
 
             Diary diary = Diary.builder()
                     .today(CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()))
+                    .title(tfTitle.getText().toString())
                     .content(mEditor.getHtml())
                     .user(user.getEmail())
                     .build();
@@ -115,8 +118,6 @@ public class WriteDiaryActivity extends AppCompatActivity implements InitSetting
 
     @Override
     public void initSetting() {
-        ivPhoto.setVisibility(View.INVISIBLE);
-
 
         mEditor.setEditorHeight(200);
         mEditor.setEditorFontSize(22);
@@ -126,7 +127,7 @@ public class WriteDiaryActivity extends AppCompatActivity implements InitSetting
 
         Toolbar myToolbar = findViewById(R.id.writeDiaryToolbar);
         setSupportActionBar(myToolbar);
-        myToolbar.setTitle("");
+        getSupportActionBar().setTitle("");
 
     }
 

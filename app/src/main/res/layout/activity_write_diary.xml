@@ -47,43 +47,34 @@
 
 
 
-<!--        <com.google.android.material.textfield.TextInputLayout-->
-<!--            android:id="@+id/textInputLayout"-->
-<!--            android:layout_width="match_parent"-->
-<!--            android:layout_height="0dp"-->
-<!--            android:layout_weight="5"-->
-<!--            app:layout_constraintEnd_toEndOf="parent"-->
-<!--            app:layout_constraintStart_toStartOf="parent"-->
-<!--            app:layout_constraintTop_toBottomOf="@+id/ivPhoto">-->
 
-<!--            <com.google.android.material.textfield.TextInputEditText-->
-<!--                android:id="@+id/tfContent"-->
-<!--                android:background="@color/beige"-->
-<!--                android:layout_width="match_parent"-->
-<!--                android:layout_height="match_parent"-->
-<!--                android:gravity="top|left"-->
-<!--                android:hint="오늘 하루 있었던 일을 기록해보세요"-->
-<!--                android:inputType="textMultiLine"-->
-<!--                android:maxHeight="5.0dip"-->
-<!--                android:minWidth="10.0dip"-->
-<!--                android:scrollHorizontally="false" />-->
-<!--        </com.google.android.material.textfield.TextInputLayout>-->
-
-
-        <ImageView
-            android:id="@+id/ivPhoto"
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/textInputLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+            app:layout_constraintTop_toBottomOf="@+id/ivPhoto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tfTitle"
+                android:background="@color/beige"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="top|left"
+                android:hint="일기의 제목을 적어주세요"
+                android:inputType="textMultiLine"
+                android:maxHeight="5.0dip"
+                android:minWidth="10.0dip"
+                android:scrollHorizontally="false" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+
         <jp.wasabeef.richeditor.RichEditor
             android:id="@+id/editor"
             android:backgroundTint="@color/beige"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" >
+            android:layout_height="580dp" >
 
 
         </jp.wasabeef.richeditor.RichEditor>

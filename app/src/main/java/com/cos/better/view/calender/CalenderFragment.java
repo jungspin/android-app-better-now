@@ -9,6 +9,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -23,8 +24,10 @@ import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 import com.cos.better.view.calender.decorator.DefaultDecorator;
 import com.cos.better.view.calender.decorator.EventDecorator;
+import com.cos.better.view.calender.decorator.TestDecorator;
 import com.cos.better.view.calender.decorator.TodayDecorator;
 import com.cos.better.view.calender.decorator.SundayDecorator;
+import com.cos.better.viewModel.CalenderDayListViewModel;
 import com.cos.better.viewModel.CalenderListViewModel;
 import com.cos.better.viewModel.DiaryListViewModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -44,12 +47,13 @@ public class CalenderFragment extends Fragment implements InitSetting {
     private View view;
 
     private MaterialCalendarView calendarView;
+    private SwipeRefreshLayout swipeLy;
 
     CustomDate customDate = new CustomDate();
     private CalenderDayDTO dayDTO;
     private ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
     private DiaryListViewModel vm;
-    private CalenderListViewModel clv;
+    private CalenderDayListViewModel cdvm;
 
     Calendar cal = Calendar.getInstance();
     int month = cal.get(Calendar.MONTH)+1;
@@ -88,10 +92,16 @@ public class CalenderFragment extends Fragment implements InitSetting {
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+
+    }
 
     @Override
     public void init() {
         calendarView = view.findViewById(R.id.calendarView);
+        swipeLy = view.findViewById(R.id.swipeLy);
 
     }
 
@@ -123,8 +133,15 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     @Override
     public void initSetting() {
+        swipeLy.setColorSchemeResources(R.color.brown);
+        swipeLy.setOnRefreshListener(() -> {
+            Log.d(TAG, "onRefresh: ");
+            initData();
+            swipeLy.setRefreshing(false);
+        });
+
         vm = new ViewModelProvider((HomeActivity)mContext).get(DiaryListViewModel.class);
-        clv = new ViewModelProvider((HomeActivity)mContext).get(CalenderListViewModel.class);
+        cdvm = new ViewModelProvider((HomeActivity)mContext).get(CalenderDayListViewModel.class);
         calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext)/*,new EventDecorator(mContext, calendarDayList)*/);
 
         
@@ -143,7 +160,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
     public void initData() {
         vm.findAllDiary();
         vm.getDiaryList().observe((HomeActivity)mContext, data ->{
-            if (data.size() != 0){
+            if (data!=null){
                 for (int i=0; i<data.size();i++){
                     calendarDayList.add(data.get(i).getToday());
                 }
@@ -157,21 +174,18 @@ public class CalenderFragment extends Fragment implements InitSetting {
         });
         today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
         Log.d(TAG, "initData customdate: " + today);
-//        clv.findAllSchedule(CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay()));
-//        clv.getMdCalenderList().observe((HomeActivity)mContext, data ->{
-//            if(data != null){
-//                List<CalendarDay> calendarDays = new ArrayList<>();
-//                for(int i=0; i<data.size();i++){
-//                    CalendarDay day = data.get(i).getCalendarDayList().get(i);
-//                    calendarDays.add(day);
-//                }
-//                List<CalendarDay> newCalenderList = deleteDup(calendarDays);
-//                Log.d(TAG, "initData: getMdCalenderList : " + newCalenderList.size());
-//                calendarView.addDecorators(new EventDecorator(mContext, newCalenderList));
-//            } else {
-//                Log.d(TAG, "initData: getMdCalenderList 데이터 없음");
-//            }
-//        });
+
+        cdvm.findAllCalendar();
+        cdvm.getMdCldList().observe((HomeActivity)mContext, data ->{
+            if (data != null){
+                List<CalendarDay> newList = deleteDup(data);
+                Log.d(TAG, "findAllCalendar: " + newList.size());
+                calendarView.addDecorators(new EventDecorator(mContext, newList));
+            } else {
+                Log.d(TAG, "findAllCalendar: 데이터 없음");
+            }
+            
+        });
 
     }
 

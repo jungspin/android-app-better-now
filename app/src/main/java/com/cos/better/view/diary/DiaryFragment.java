@@ -128,6 +128,7 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
     @Override
     public void initSetting() {
+        ivPhoto.setVisibility(View.INVISIBLE);
         calendarView.setSelectedDate(cal);
 
         // 처음 앱 실행시 Calender
@@ -149,10 +150,12 @@ public class DiaryFragment extends Fragment implements InitSetting {
             if (data == null){
                 Log.d(TAG, "initData: null " );
                 mtvToday.setText(month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일" + "은 어땠나요?");
+                ivPhoto.setVisibility(View.INVISIBLE);
                 btnLinkWrite.setVisibility(View.VISIBLE);
             } else {
                 Log.d(TAG, "initData: " + data.getToday());
                 mtvToday.setText(data.getContent());
+                ivPhoto.setVisibility(View.VISIBLE);
                 btnLinkWrite.setVisibility(View.INVISIBLE);
             }
 

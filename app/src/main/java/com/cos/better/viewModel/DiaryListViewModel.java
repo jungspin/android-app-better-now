@@ -6,7 +6,10 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cos.better.model.Diary;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
@@ -18,6 +21,7 @@ public class DiaryListViewModel extends ViewModel {
     private static final String TAG = "DiaryListViewModel";
 
     FirebaseFirestore db = FirebaseFirestore.getInstance();
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     private MutableLiveData<List<Diary>> diaryList = new MutableLiveData<>();
 
@@ -31,12 +35,13 @@ public class DiaryListViewModel extends ViewModel {
 
 
     public void findAllDiary(){
-        db.collection("diary")
+
+        db.collection("diary").whereEqualTo("user", user.getEmail())
                 .get()
                 .addOnCompleteListener(runnable -> {
                     Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
                     List<Diary> diaries = new ArrayList<>();
-                    if(runnable.isSuccessful()){
+                    if(runnable.getResult().size()!=0){
                         for (QueryDocumentSnapshot document : runnable.getResult()){
                             Log.d(TAG, "findAllDiary: " + document.getId() + " => " + document.getData());
 
@@ -45,6 +50,8 @@ public class DiaryListViewModel extends ViewModel {
                         }
                        // Log.d(TAG, "diaryList: " + diaries.get(0).getToday());
                         diaryList.setValue(diaries);
+                    } else {
+                        Log.d(TAG, "findAllDiary: 데이터 없음");
                     }
                 })
                 .addOnFailureListener(runnable -> {
