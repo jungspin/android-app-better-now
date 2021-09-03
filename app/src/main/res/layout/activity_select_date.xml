@@ -15,7 +15,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/ivSplCancel"
+            android:id="@+id/ivCancel"
             android:layout_width="30dp"
             android:layout_height="30dp"
             android:layout_marginStart="16dp"
@@ -30,7 +30,7 @@
             android:layout_height="30dp"
             android:layout_marginEnd="16dp"
             android:src="@drawable/ic_calender_check"
-            app:layout_constraintBottom_toBottomOf="@+id/ivSplCancel"
+            app:layout_constraintBottom_toBottomOf="@+id/ivCancel"
             app:layout_constraintEnd_toEndOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 

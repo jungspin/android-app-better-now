@@ -43,7 +43,7 @@ public class DiaryListViewModel extends ViewModel {
                             diaries.add(document.toObject(Diary.class));
 
                         }
-                        Log.d(TAG, "diaryList: " + diaries.get(0).getToday());
+                       // Log.d(TAG, "diaryList: " + diaries.get(0).getToday());
                         diaryList.setValue(diaries);
                     }
                 })

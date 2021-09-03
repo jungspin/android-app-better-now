@@ -15,20 +15,24 @@
         <entry key="app/src/main/res/drawable/circle_btn_on.xml" value="0.20405405405405405" />
         <entry key="app/src/main/res/drawable/cricle_btn_off.xml" value="0.20405405405405405" />
         <entry key="app/src/main/res/drawable/ic_analytics.xml" value="0.21911111111111112" />
+        <entry key="app/src/main/res/drawable/ic_launcher_background.xml" value="0.26851851851851855" />
+        <entry key="app/src/main/res/drawable/ic_money.xml" value="0.2722222222222222" />
         <entry key="app/src/main/res/drawable/ic_notification.xml" value="0.23055555555555557" />
         <entry key="app/src/main/res/drawable/ic_status.xml" value="0.18888888888888888" />
         <entry key="app/src/main/res/drawable/ic_study.xml" value="0.23425925925925925" />
         <entry key="app/src/main/res/drawable/status_icon_style.xml" value="0.2036036036036036" />
         <entry key="app/src/main/res/drawable/status_stroke.xml" value="0.2036036036036036" />
         <entry key="app/src/main/res/layout/activity_add_habit.xml" value="0.26588845654993515" />
-        <entry key="app/src/main/res/layout/activity_add_habit2.xml" value="0.34324324324324323" />
+        <entry key="app/src/main/res/layout/activity_add_habit2.xml" value="0.24073242373382514" />
         <entry key="app/src/main/res/layout/activity_add_schedule.xml" value="0.34324324324324323" />
-        <entry key="app/src/main/res/layout/activity_category_status.xml" value="0.32522522522522523" />
+        <entry key="app/src/main/res/layout/activity_category_status.xml" value="0.2886732865413474" />
+        <entry key="app/src/main/res/layout/activity_check_my_habit.xml" value="0.24332482156744065" />
         <entry key="app/src/main/res/layout/activity_habit_status.xml" value="0.24418471225893532" />
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.32522522522522523" />
         <entry key="app/src/main/res/layout/activity_intent_test.xml" value="0.19594594594594594" />
         <entry key="app/src/main/res/layout/activity_login.xml" value="0.2063063063063063" />
         <entry key="app/src/main/res/layout/activity_month_dialog.xml" value="0.2811663783678297" />
+        <entry key="app/src/main/res/layout/activity_select_date.xml" value="0.38258164852255055" />
         <entry key="app/src/main/res/layout/activity_show_schedule.xml" value="0.19594594594594594" />
         <entry key="app/src/main/res/layout/activity_status.xml" value="0.22439427260382708" />
         <entry key="app/src/main/res/layout/activity_status_detail.xml" value="0.12052687501750123" />
@@ -43,16 +47,18 @@
         <entry key="app/src/main/res/layout/fragment_category_all.xml" value="0.32522522522522523" />
         <entry key="app/src/main/res/layout/fragment_day.xml" value="0.335" />
         <entry key="app/src/main/res/layout/fragment_diary.xml" value="0.32522522522522523" />
-        <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.26636767431167396" />
+        <entry key="app/src/main/res/layout/fragment_habit.xml" value="0.39551678411275704" />
         <entry key="app/src/main/res/layout/fragment_habit1m.xml" value="0.4672610890874636" />
+        <entry key="app/src/main/res/layout/fragment_habit_all.xml" value="0.18783783783783783" />
         <entry key="app/src/main/res/layout/fragment_my_calender.xml" value="0.34324324324324323" />
         <entry key="app/src/main/res/layout/fragment_my_diary.xml" value="0.32522522522522523" />
         <entry key="app/src/main/res/layout/fragment_my_habit.xml" value="0.2481675392670157" />
         <entry key="app/src/main/res/layout/fragment_mypage.xml" value="0.12731274384791938" />
         <entry key="app/src/main/res/layout/fragment_status.xml" value="0.3465011013671754" />
-        <entry key="app/src/main/res/layout/habit_item.xml" value="0.27218732806016815" />
+        <entry key="app/src/main/res/layout/habit_item.xml" value="0.4530386740331492" />
         <entry key="app/src/main/res/layout/mypage_diary_item.xml" value="0.2063063063063063" />
         <entry key="app/src/main/res/layout/staus_item.xml" value="0.27984569264434034" />
+        <entry key="app/src/main/res/layout/test_write_diary.xml" value="0.18783783783783783" />
         <entry key="app/src/main/res/menu/status_detail_menu.xml" value="0.32522522522522523" />
       </map>
     </option>

@@ -88,7 +88,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[0] = false;
                 }
                 if(isClicked[0]){
-                    weekData +=" "+toggleBtns[0].getText();
+                    weekData +=toggleBtns[0].getText()+" ";
                 }
             }
         });
@@ -105,7 +105,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[1] = false;
                 }
                 if(isClicked[1]){
-                    weekData +=" "+ toggleBtns[1].getText();
+                    weekData +=toggleBtns[1].getText()+" ";
                 }
             }
         });
@@ -122,7 +122,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[2] = false;
                 }
                 if(isClicked[2]){
-                    weekData +=" "+  toggleBtns[2].getText();
+                    weekData +=toggleBtns[2].getText()+" ";
                 }
             }
         });
@@ -138,7 +138,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[3] = false;
                 }
                 if(isClicked[3]){
-                    weekData +=" "+ toggleBtns[3].getText();
+                    weekData +=toggleBtns[3].getText()+" ";
                 }
             }
         });
@@ -154,7 +154,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[4] = false;
                 }
                 if(isClicked[4]){
-                    weekData += " "+toggleBtns[4].getText();
+                    weekData +=toggleBtns[4].getText()+" ";
                 }
             }
         });
@@ -169,7 +169,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[5] = false;
                 }
                 if(isClicked[5]){
-                    weekData += " "+ toggleBtns[5].getText();
+                    weekData += toggleBtns[5].getText()+" ";
                 }
             }
         });
@@ -184,7 +184,7 @@ public class dayFragment extends Fragment implements InitSetting {
                     isClicked[6] = false;
                 }
                 if(isClicked[6]){
-                    weekData +=" "+ toggleBtns[6].getText();
+                    weekData +=toggleBtns[6].getText()+" ";
 
                 }
             }

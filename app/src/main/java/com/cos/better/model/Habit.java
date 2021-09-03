@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 @Data
 @Builder
 public class Habit {
+    private int icon;
     private String habitTitle;
     private int cycleCode;
     private String category;

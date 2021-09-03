@@ -19,7 +19,9 @@ import android.widget.ToggleButton;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
-import com.cos.better.model.Calender;
+import com.cos.better.dto.CalenderDayDTO;
+import com.cos.better.dto.HabitDto;
+import com.cos.better.model.Habit;
 import com.cos.better.view.calender.decorator.SundayDecorator;
 import com.cos.better.view.mypage.adapter.MyHabitAdapter;
 import com.cos.better.view.status.adapter.StatusAdapter;
@@ -28,8 +30,11 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class MyHabitFragment extends Fragment implements InitSetting {
@@ -42,11 +47,16 @@ public class MyHabitFragment extends Fragment implements InitSetting {
     private  View view;
     private DocumentReference documentReference;
     private MaterialCalendarView mcView;
-    private Calendar cal = Calendar.getInstance();
     private RecyclerView rvHabit;
     private RecyclerView.LayoutManager layoutManager;
     private MyHabitAdapter myHabitAdapter;
+    private List<String> weekList =new ArrayList();
+    private List<String> monthList = new ArrayList();
+    private List<Habit> everyDayList = new ArrayList<>();
 
+    private CalenderDayDTO dayDTO;
+    Calendar cal = Calendar.getInstance();
+    int month = cal.get(Calendar.MONTH)+1;
 
     public MyHabitFragment(MypageFragment mFragment){
 
@@ -61,13 +71,43 @@ public class MyHabitFragment extends Fragment implements InitSetting {
 
         habitViewModel.getHabit().observe(getViewLifecycleOwner(),changeHabit ->{
             for(int i =0; i<changeHabit.size(); i++){
+                Habit habit= changeHabit.get(i);
                 Log.d(TAG, "onCreateView: "+changeHabit.get(i));
-               if(changeHabit.get(i).getCycleCode()==0){ //매일
-                   //changeHabit.get(i).getCycle()
-               }else if(changeHabit.get(i).getCycleCode()==1){ //매주
+               if(habit.getCycleCode()==0){ //매일
+                   Log.d(TAG, "onCreateView: 매일"+habit);
+                   everyDayList.add(habit);
+               }else if(habit.getCycleCode()==1){ //매주
+                   weekList = Arrays.asList(habit.getCycle().split(" "));
+                   Log.d(TAG, "onCreateView: weekList"+weekList);
+                   for(int j = 0; j<weekList.size(); j++){
+                       switch (weekList.get(j)){
 
-               }else{
+                           case "일":
 
+                               break;
+                           case "월":
+                               break;
+                           case "화":
+                               break;
+                           case "수":
+                               break;
+                           case "목":
+                               break;
+                           case "금":
+                               break;
+                           case "토":
+                               break;
+
+
+                       }
+                   }
+
+               }else{ //매달
+                    monthList = Arrays.asList(habit.getCycle().split(" "));
+                   Log.d(TAG, "onCreateView: monthList"+monthList);
+                   for(int j = 0; j<monthList.size(); j++){
+
+                   }
                }
             }
         });
@@ -105,6 +145,19 @@ public class MyHabitFragment extends Fragment implements InitSetting {
 
     @Override
     public void initLr() {
+        mcView.setOnDateChangedListener((widget, date, selected)->{
+            cal.set(date.getYear(), date.getMonth(), date.getDay());
+            month = cal.get(Calendar.MONTH)+1;
+            dayDTO = new CalenderDayDTO(cal.get(Calendar.YEAR),month,cal.get(Calendar.DATE));
+            Log.d(TAG, "initLr: "+dayDTO.toString());
+            if(everyDayList.size()!=0) {
+                for(int i =0; i<everyDayList.size(); i++) {
+                    Habit habit = everyDayList.get(i);
+                    Log.d(TAG, "initLr: 매일 습관 표시됨");
+                    myHabitAdapter.addItem(new HabitDto(habit.getIcon(),habit.getHabitTitle(),"미달성"));
+                }
+            }
+        });
 }
 
 
@@ -116,6 +169,6 @@ public class MyHabitFragment extends Fragment implements InitSetting {
     }
     public void addDb(){
         Log.d(TAG, "addDb: 실행됨");
-        documentReference = db.collection("habits").document("habit1");
+        //documentReference = db.collection("habits").document("habit1");
     }
 }

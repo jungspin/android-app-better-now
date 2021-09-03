@@ -11,6 +11,9 @@ import android.view.ViewGroup;
 import com.cos.better.R;
 import com.cos.better.view.HomeActivity;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class MyCalenderFragment extends Fragment {
 
     private static final String TAG = "MyCalenderFragment";

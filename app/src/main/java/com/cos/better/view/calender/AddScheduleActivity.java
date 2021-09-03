@@ -20,9 +20,6 @@ import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
 import com.cos.better.config.MyDialogFragment;
 import com.cos.better.dto.CalenderDTO;
-import com.cos.better.model.CalenderObj;
-import com.cos.better.view.HomeActivity;
-import com.cos.better.viewModel.CalenderListViewModel;
 import com.cos.better.viewModel.CalenderViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.firebase.auth.FirebaseAuth;
@@ -102,7 +99,7 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
         tfTitle = findViewById(R.id.tfTitle);
         tvStartDate = findViewById(R.id.tvStartDate);
         tvEndDate = findViewById(R.id.tvEndDate);
-        ivSplCancel = findViewById(R.id.ivSplCancel);
+        ivSplCancel = findViewById(R.id.ivCancel);
         ivSplSave = findViewById(R.id.ivSplSave);
         mcvSelectDate = findViewById(R.id.mcvSelectDate);
         tpSelectStartTime = findViewById(R.id.tpSelectStartTime);

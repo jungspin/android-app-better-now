@@ -98,7 +98,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[0].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[0] ==true){
-                    dayData +=" " + toggleBtns[0].getText();
+                    dayData +=toggleBtns[0].getText()+" ";
                 }
             }
         });
@@ -118,7 +118,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[1].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[1] ==true){
-                    dayData +=" " + toggleBtns[1].getText();
+                    dayData +=toggleBtns[1].getText()+" ";
                 }
             }
         });
@@ -138,7 +138,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[2].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[2] ==true){
-                    dayData +=" " + toggleBtns[2].getText();
+                    dayData +=toggleBtns[2].getText()+" ";
                 }
             }
         });
@@ -157,7 +157,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[3].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[3] ==true){
-                    dayData +=" " + toggleBtns[3].getText();
+                    dayData +=toggleBtns[3].getText()+" ";
                 }
             }
         });
@@ -176,7 +176,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[4].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[4] ==true){
-                    dayData +=" " + toggleBtns[4].getText();
+                    dayData +=toggleBtns[4].getText()+" " ;
                 }
             }
         });
@@ -195,7 +195,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[5].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[5] ==true){
-                    dayData +=" " + toggleBtns[5].getText();
+                    dayData +=toggleBtns[5].getText()+" ";
                 }
             }
         });
@@ -214,7 +214,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[6].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[6] ==true){
-                    dayData +=" " + toggleBtns[6].getText();
+                    dayData +=toggleBtns[6].getText()+" " ;
                 }
             }
         });
@@ -232,7 +232,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[7].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[7] ==true){
-                    dayData +=" " + toggleBtns[7].getText();
+                    dayData +=toggleBtns[7].getText()+" ";
                 }
             }
         });
@@ -252,7 +252,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[8].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[8] ==true){
-                    dayData +=" " + toggleBtns[8].getText();
+                    dayData +=toggleBtns[8].getText()+" ";
                 }
             }
         });
@@ -272,7 +272,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[9].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[9] ==true){
-                    dayData +=" " + toggleBtns[9].getText();
+                    dayData +=toggleBtns[9].getText()+" ";
                 }
             }
         });
@@ -291,7 +291,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[10].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[10] ==true){
-                    dayData +=" " + toggleBtns[10].getText();
+                    dayData +=toggleBtns[10].getText()+" ";
                 }
             }
         });
@@ -310,7 +310,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[11].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[11] ==true){
-                    dayData +=" " + toggleBtns[11].getText();
+                    dayData +=toggleBtns[11].getText()+" ";
                 }
             }
         });
@@ -329,7 +329,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[12].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[12] ==true){
-                    dayData +=" " + toggleBtns[12].getText();
+                    dayData +=toggleBtns[12].getText()+" ";
                 }
 
             }
@@ -349,7 +349,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[13].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[13] ==true){
-                    dayData +=" " + toggleBtns[13].getText();
+                    dayData +=toggleBtns[13].getText()+" ";
                 }
             }
         });
@@ -368,7 +368,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[14].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[14] ==true){
-                    dayData +=" " + toggleBtns[14].getText();
+                    dayData +=toggleBtns[14].getText()+" ";
                 }
             }
         });
@@ -387,7 +387,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[15].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[15] ==true){
-                    dayData +=" " + toggleBtns[15].getText();
+                    dayData +=toggleBtns[15].getText()+" ";
                 }
             }
         });
@@ -406,7 +406,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[16].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[16] ==true){
-                    dayData +=" " + toggleBtns[16].getText();
+                    dayData +=toggleBtns[16].getText()+" ";
                 }
             }
         });
@@ -425,7 +425,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[17].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[17] ==true){
-                    dayData +=" " + toggleBtns[17].getText();
+                    dayData +=toggleBtns[17].getText()+" ";
                 }
             }
         });
@@ -444,7 +444,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[18].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[18 ] ==true){
-                    dayData +=" " + toggleBtns[18].getText();
+                    dayData +=toggleBtns[18].getText()+" " ;
                 }
             }
         });
@@ -463,7 +463,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[19].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[19] ==true){
-                    dayData +=" " + toggleBtns[19].getText();
+                    dayData +=toggleBtns[19].getText()+" ";
                 }
             }
         });
@@ -482,7 +482,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[20].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[20] ==true){
-                    dayData +=" " + toggleBtns[20].getText();
+                    dayData +=toggleBtns[20].getText()+" ";
                 }
             }
         });
@@ -501,7 +501,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[21].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[21] ==true){
-                    dayData +=" " + toggleBtns[21].getText();
+                    dayData +=toggleBtns[21].getText()+" ";
                 }
             }
         });
@@ -520,7 +520,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[22].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[22] ==true){
-                    dayData +=" " + toggleBtns[22].getText();
+                    dayData +=toggleBtns[22].getText()+" ";
                 }
             }
         });
@@ -539,7 +539,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[23].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[23] ==true){
-                    dayData +=" " + toggleBtns[23].getText();
+                    dayData +=toggleBtns[23].getText()+" ";
                 }
             }
         });
@@ -558,7 +558,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[24].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[24] ==true){
-                    dayData +=" " + toggleBtns[24].getText();
+                    dayData +=toggleBtns[24].getText()+" ";
                 }
             }
         });
@@ -577,7 +577,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[25].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[25] ==true){
-                    dayData +=" " + toggleBtns[25].getText();
+                    dayData +=toggleBtns[25].getText()+" ";
                 }
             }
         });
@@ -597,7 +597,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[26].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[26] ==true){
-                    dayData +=" " + toggleBtns[26].getText();
+                    dayData +=toggleBtns[26].getText()+" ";
                 }
             }
         });
@@ -616,7 +616,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[27].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[27] ==true){
-                    dayData +=" " + toggleBtns[27].getText();
+                    dayData +=toggleBtns[27].getText()+" ";
                 }
             }
         });
@@ -635,7 +635,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[28].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[28] ==true){
-                    dayData +=" " + toggleBtns[28].getText();
+                    dayData +=toggleBtns[28].getText()+" ";
                 }
             }
         });
@@ -654,7 +654,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[29].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[29] ==true){
-                    dayData +=" " + toggleBtns[29].getText();
+                    dayData +=toggleBtns[29].getText()+" ";
                 }
             }
         });
@@ -673,7 +673,7 @@ public class MonthDialog extends Dialog {
                     toggleBtns[30].setBackgroundResource(R.drawable.circle_btn_off);
                 }
                 if (IsClicked[30] ==true){
-                    dayData +=" " + toggleBtns[30].getText();
+                    dayData +=toggleBtns[30].getText()+" ";
                 }
             }
         });

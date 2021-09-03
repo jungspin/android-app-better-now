@@ -220,37 +220,58 @@ public class AddHabitActivity extends AppCompatActivity implements InitSetting, 
        btnHabitText.setText(category);
     }
 
-    public void addDb(){
-        db = FirebaseFirestore.getInstance();
-        habit.put("category",category);
-        habit.put("habitTitle",habitTitle);
-        habit.put("cycleCode",cycleCode);
-        if(cycleCode == 0)
-            habit.put("cycle","매일");
-        else if(cycleCode ==1 ) {
-            Log.d(TAG, "addDb: "+weekData);
-            habit.put("cycle", weekData);
-        }
-        else if(cycleCode ==2) {
-            Log.d(TAG, "addDb: "+dayData);
-            habit.put("cycle", dayData);
-        }
-        habit.put("notification",notification);
+    public void addDb() {
+        if (habitTitle != null) {
+            db = FirebaseFirestore.getInstance();
+            switch (category) {
+                case "건강":
+                    habit.put("icon", R.drawable.ic_health);
+                    break;
+                case "독서":
+                    habit.put("icon", R.drawable.ic_book);
+                    break;
+                case "생활습관":
+                    habit.put("icon", R.drawable.ic_lifecycle);
+                    break;
+                case "공부":
+                    habit.put("icon", R.drawable.ic_study);
+                    break;
+                case "자산관리":
+                    habit.put("icon", R.drawable.ic_money);
+                    break;
+                case "기타":
+                    habit.put("icon", R.drawable.ic_other);
+                    break;
+            }
+            habit.put("category", category);
+            habit.put("habitTitle", habitTitle);
+            habit.put("cycleCode", cycleCode);
+            if (cycleCode == 0)
+                habit.put("cycle", "매일");
+            else if (cycleCode == 1) {
+                Log.d(TAG, "addDb: " + weekData);
+                habit.put("cycle", weekData);
+            } else if (cycleCode == 2) {
+                Log.d(TAG, "addDb: " + dayData);
+                habit.put("cycle", dayData);
+            }
+            habit.put("notification", notification);
 
-        db.collection("habits")
-                .add(habit)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+            db.collection("habits")
+                    .add(habit)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
-                    public void onSuccess(DocumentReference documentReference) {
-                        Log.d(TAG, "onSuccess: "+documentReference.getId());
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.d(TAG, "onFailure: "+e);
-                    }
-                });
+                        public void onSuccess(DocumentReference documentReference) {
+                            Log.d(TAG, "onSuccess: " + documentReference.getId());
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.d(TAG, "onFailure: " + e);
+                        }
+                    });
+        }
     }
 
     @Override
