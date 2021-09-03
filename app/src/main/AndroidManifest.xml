@@ -19,17 +19,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
-        <activity android:name=".view.HomeActivity"/>
+        <activity android:name=".view.diary.DetailDiaryActivity"></activity>
+        <activity android:name=".view.HomeActivity" />
         <activity
             android:name=".view.calender.SelectDateActivity"
             android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity android:name=".view.calender.AddScheduleActivity" />
-        <activity android:name=".view.status.StatusDetailActivity"/>
         <activity
             android:name=".view.status.StatusActivity"
             android:exported="true" />
         <activity android:name=".view.diary.IntentTestActivity" />
-        <activity android:name=".view.habit.AddHabitActivity2" />
         <activity
             android:name=".view.status.habit.HabitStatus"
             android:exported="true" />
@@ -46,7 +45,8 @@
         <activity
             android:name=".view.calender.ShowScheduleActivity"
             android:theme="@style/Theme.mDialog" />
-        <activity android:name=".view.status.StatusDetailActivity"/>
+        <activity android:name=".view.status.StatusDetailActivity" />
+        <activity android:name=".view.LoadingActivity" />
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -54,6 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.cos.better.fileprovider"
@@ -64,7 +65,22 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <service
+            android:name=".config.MyFirebaseMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
 
+        <receiver
+            android:name=".config.AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

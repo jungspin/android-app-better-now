@@ -19,7 +19,7 @@ import android.widget.ToggleButton;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
-import com.cos.better.model.Calender;
+import com.cos.better.model.CalenderObj;
 import com.cos.better.view.calender.decorator.SundayDecorator;
 import com.cos.better.view.mypage.adapter.MyHabitAdapter;
 import com.cos.better.view.status.adapter.StatusAdapter;

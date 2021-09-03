@@ -1,6 +1,7 @@
 package com.cos.better.config;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.cos.better.R;
 import com.cos.better.model.Diary;
 import com.cos.better.view.HomeActivity;
+import com.cos.better.view.diary.DetailDiaryActivity;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
@@ -27,6 +29,11 @@ import java.util.List;
 public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.MyViewHolder>{
 
     private static final String TAG = "MypageDiaryAdapter";
+    private HomeActivity mContext;
+
+    public MypageDiaryAdapter(HomeActivity mContext) {
+        this.mContext = mContext;
+    }
 
     private List<Diary> diaryList = new ArrayList<>();
 
@@ -67,7 +74,7 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
     }
 
 
-    public static class MyViewHolder extends RecyclerView.ViewHolder{
+    public class MyViewHolder extends RecyclerView.ViewHolder{
 
         private TextView tvDate, tvTitle;
         private ImageView ivPhoto;
@@ -87,20 +94,37 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
             String setTime = cal.getYear() + "년 " + (cal.getMonth()+1) + "월 " + cal.getDay() + "일";
 
             tvDate.setText(setTime);
-            tvTitle.setText(diary.getContent());
+            tvTitle.setText(diary.getTitle());
 
-            Glide
-                    .with(itemView)
-                    .load("https://picsum.photos/100/100")
-                    .centerCrop()
-                    .placeholder(R.drawable.img_diary_default) // 사진 없을 때
-                    .into(ivPhoto);
+//            Glide
+//                    .with(itemView)
+//                    .load("https://picsum.photos/100/100")
+//                    .centerCrop()
+//                    .placeholder(R.drawable.img_diary_default) // 사진 없을 때
+//                    .into(ivPhoto);
 
         }
 
         private void initLr(){
             itemView.setOnClickListener(v->{
                 Log.d(TAG, "initLr: 클릭됨 " + getAdapterPosition());
+                Diary diary = diaryList.get(getAdapterPosition());
+                Log.d(TAG, "initLr: " + diary.toString());
+                Intent intent = new Intent(mContext, DetailDiaryActivity.class);
+
+                CalendarDay day = diary.getToday();
+                CustomDate date = CustomDate.builder()
+                        .month(day.getMonth())
+                        .year(day.getYear())
+                        .day(day.getDay()).build();
+
+                intent.putExtra("date", date);
+
+                Log.d(TAG, "initLr: " + date.toString());
+
+                intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+                mContext.startActivity(intent);
             });
         }
     }

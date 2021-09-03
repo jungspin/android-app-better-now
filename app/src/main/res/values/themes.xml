@@ -13,10 +13,11 @@
         <item name="android:statusBarColor" tools:targetApi="l">@color/beige</item>
         <!-- Customize your theme here. -->
         <item name="android:background">@color/beige</item>
+        <item name="android:windowActivityTransitions">true</item>
 
     </style>
     <!-- for popup activity-->
-    <style name="Theme.mDialog" parent="Theme.AppCompat.Dialog">
+    <style name="Theme.mDialog" parent="Theme.MaterialComponents.Light.BottomSheetDialog">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
     </style>

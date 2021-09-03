@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.cos.better.model.Diary;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
@@ -50,9 +52,10 @@ public class DiaryViewModel extends ViewModel {
 
 
     public void findOne(CalendarDay today){ // 사실은 한건이 아님. 몇건일지 모름
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d(TAG, "findOne: " + today);
         db.collection("diary")
-                .whereEqualTo("today", today) // 쿼리는 이런식으로 작성하면 될듯
+                .whereEqualTo("today", today).whereEqualTo("user", user.getEmail()) // 쿼리는 이런식으로 작성하면 될듯
                 .get()
                 .addOnCompleteListener(runnable -> {
                     if (runnable.getResult().size() == 0){

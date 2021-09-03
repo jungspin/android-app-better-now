@@ -1,9 +1,13 @@
 package com.cos.better.view.calender;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.app.AlarmManager;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,6 +20,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cos.better.R;
+import com.cos.better.config.AlarmReceiver;
 import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
 import com.cos.better.config.MyDialogFragment;
@@ -31,9 +36,12 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 public class AddScheduleActivity extends AppCompatActivity implements InitSetting {
@@ -54,18 +62,18 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
 
     private CalenderViewModel vm;
 
-
-
-
-
     CustomDate startDate = new CustomDate();
     CustomDate endDate = new CustomDate();
-
-
 
     Calendar calendar = Calendar.getInstance();
     private List<CalendarDay> calendarDays = null;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+    private AlarmManager alarmManager;
+    private GregorianCalendar mCalender;
+
+    private NotificationManager notificationManager;
+    NotificationCompat.Builder builder;
 
 
 
@@ -173,7 +181,13 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
             tpSelectStartTime.setOnTimeChangedListener((timePicker, i, i1) -> {
                 startDate.setHour(timePicker.getHour());
                 startDate.setMinute(timePicker.getMinute());
+
+                // 시작 시간으로 가야함
+                endDate.setHour(tpSelectStartTime.getHour());
+                endDate.setMinute(tpSelectStartTime.getMinute());
             });
+
+            // 종료 시각 설정
             tpSelectEndTime.setOnTimeChangedListener((timePicker, i, i1) -> {
                 endDate.setHour(timePicker.getHour());
                 endDate.setMinute(timePicker.getMinute());
@@ -254,6 +268,11 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
                     .endDate(end)
                     .build();
 
+            if(calenderDTO.getIsAlert() == true){
+                Log.d(TAG, "calenderDTO.getStartDate(): " + calenderDTO.getStartDate());
+                setAlarm(start);
+            }
+
             Log.d(TAG, "ivSave: " + calenderDTO.getIsAlert());
             vm.insertSchedule(mContext, calenderDTO);
 
@@ -303,10 +322,23 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
        // spl 화면 한번 더 누르면? 내려가지 못하게 막아야함..
         mcvSelectDate.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
         // 해당 날짜 표시해줄까 말까
-        Calendar date = (Calendar) getIntent().getSerializableExtra("date");
-        mcvSelectDate.setSelectedDate(CalendarDay.from(date));
+        CustomDate date = (CustomDate) getIntent().getSerializableExtra("date");
+        mcvSelectDate.setSelectedDate(CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()));
+
+        startDate.setYear(date.getYear());
+        startDate.setMonth(date.getMonth()-1);
+        startDate.setDay(date.getDay());
+
+        endDate.setYear(date.getYear());
+        endDate.setMonth(date.getMonth()-1);
+        endDate.setDay(date.getDay());
+
+
+
         tpSelectStartTime.setIs24HourView(true);
         tpSelectEndTime.setIs24HourView(true);
+
+        tvLetMeAlert.setVisibility(View.INVISIBLE);
 
         vm = new ViewModelProvider((AddScheduleActivity)mContext).get(CalenderViewModel.class);
 
@@ -327,6 +359,22 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
         // Create an instance of the dialog fragment and show it
         DialogFragment dialog = new MyDialogFragment();
         dialog.show(getSupportFragmentManager(), "NoticeDialogFragment");
+    }
+
+    private void setAlarm(Date startDate) {
+        notificationManager = (NotificationManager)getSystemService(NOTIFICATION_SERVICE);
+
+        alarmManager = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
+        //AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(this, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0, receiverIntent, 0);
+
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(startDate);
+        Log.d(TAG, "setAlarm: " + calendar.getTimeInMillis());
+
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(),pendingIntent);
     }
 
 }
