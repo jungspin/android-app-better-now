@@ -107,7 +107,7 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
         tfTitle = findViewById(R.id.tfTitle);
         tvStartDate = findViewById(R.id.tvStartDate);
         tvEndDate = findViewById(R.id.tvEndDate);
-        ivSplCancel = findViewById(R.id.ivCancel);
+        ivSplCancel = findViewById(R.id.ivSplCancel);
         ivSplSave = findViewById(R.id.ivSplSave);
         mcvSelectDate = findViewById(R.id.mcvSelectDate);
         tpSelectStartTime = findViewById(R.id.tpSelectStartTime);
@@ -124,7 +124,10 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
     public void initLr() {
         // 일정 추가 창 닫기
         ivCancel.setOnClickListener(v->{
+            Log.d(TAG, "initLr: 닫기 클릭됨");
+
             showDialog();
+
         });
         // 날짜 지정 창 ========================================================
         tvStartDate.setOnClickListener(v->{

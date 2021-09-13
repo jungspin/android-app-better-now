@@ -70,11 +70,12 @@
         </com.google.android.material.textfield.TextInputLayout>
 
 
+
         <jp.wasabeef.richeditor.RichEditor
             android:id="@+id/editor"
             android:backgroundTint="@color/beige"
             android:layout_width="match_parent"
-            android:layout_height="580dp" >
+            android:layout_height="570dp" >
 
 
         </jp.wasabeef.richeditor.RichEditor>
@@ -89,17 +90,67 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         style="@style/Theme.AppCompat.Light.NoActionBar">
-        <ImageView
-            android:id="@+id/ivInsertPhoto"
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="right"
-            android:layout_marginEnd="10dp"
-            android:layout_marginBottom="10dp"
-            android:background="@drawable/ic_photo_ex"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
+            <ImageView
+                android:id="@+id/ivHeading1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/ic_textsize_bigger"
+                app:layout_constraintStart_toEndOf="@+id/ivHeading"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivHeading"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_textsize"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivBullet"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/ic_bullet"
+                app:layout_constraintStart_toEndOf="@+id/ivHeading1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivQuote"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginStart="12dp"
+                android:background="@drawable/ic_quote"
+                app:layout_constraintStart_toEndOf="@+id/ivBullet"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivUndo"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="12dp"
+                android:background="@drawable/ic_undo"
+                app:layout_constraintEnd_toStartOf="@+id/ivRedo"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivRedo"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_gravity="right"
+                android:layout_marginEnd="16dp"
+                android:background="@drawable/ic_redo"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.appcompat.widget.Toolbar>
 

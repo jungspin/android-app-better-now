@@ -83,7 +83,6 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
             super(itemView);
             tvDate = itemView.findViewById(R.id.tvDate);
             tvTitle = itemView.findViewById(R.id.tvTitle);
-            ivPhoto = itemView.findViewById(R.id.ivPhoto);
 
             initLr();
         }
@@ -96,12 +95,6 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
             tvDate.setText(setTime);
             tvTitle.setText(diary.getTitle());
 
-//            Glide
-//                    .with(itemView)
-//                    .load("https://picsum.photos/100/100")
-//                    .centerCrop()
-//                    .placeholder(R.drawable.img_diary_default) // 사진 없을 때
-//                    .into(ivPhoto);
 
         }
 
@@ -113,14 +106,15 @@ public class MypageDiaryAdapter extends RecyclerView.Adapter<MypageDiaryAdapter.
                 Intent intent = new Intent(mContext, DetailDiaryActivity.class);
 
                 CalendarDay day = diary.getToday();
+                Log.d(TAG, "initLr: day : " + day);
                 CustomDate date = CustomDate.builder()
-                        .month(day.getMonth())
+                        .month(day.getMonth()+1)
                         .year(day.getYear())
                         .day(day.getDay()).build();
 
                 intent.putExtra("date", date);
 
-                Log.d(TAG, "initLr: " + date.toString());
+                Log.d(TAG, "initLr: putExtra(\"date\", date): " + date.toString());
 
                 intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 

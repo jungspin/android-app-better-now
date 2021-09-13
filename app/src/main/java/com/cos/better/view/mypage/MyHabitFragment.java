@@ -64,7 +64,7 @@ public class MyHabitFragment extends Fragment implements InitSetting {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-      view = inflater.inflate(R.layout.fragment_my_habit, container, false);
+        view = inflater.inflate(R.layout.fragment_my_habit, container, false);
 
         HabitViewModel habitViewModel = new ViewModelProvider(this).get(HabitViewModel.class);
         habitViewModel.findAllHabit();
@@ -73,50 +73,51 @@ public class MyHabitFragment extends Fragment implements InitSetting {
             for(int i =0; i<changeHabit.size(); i++){
                 Habit habit= changeHabit.get(i);
                 Log.d(TAG, "onCreateView: "+changeHabit.get(i));
-               if(habit.getCycleCode()==0){ //매일
-                   Log.d(TAG, "onCreateView: 매일"+habit);
-                   everyDayList.add(habit);
-               }else if(habit.getCycleCode()==1){ //매주
-                   weekList = Arrays.asList(habit.getCycle().split(" "));
-                   Log.d(TAG, "onCreateView: weekList"+weekList);
-                   for(int j = 0; j<weekList.size(); j++){
-                       switch (weekList.get(j)){
+                if(habit.getCycleCode()==0){ //매일
+                    Log.d(TAG, "onCreateView: 매일"+habit);
+                    everyDayList.add(habit);
+                }else if(habit.getCycleCode()==1){ //매주
+                    weekList = Arrays.asList(habit.getCycle().split(" "));
+                    Log.d(TAG, "onCreateView: weekList"+weekList);
+                    for(int j = 0; j<weekList.size(); j++){
+                        switch (weekList.get(j)){
 
-                           case "일":
+                            case "일":
 
-                               break;
-                           case "월":
-                               break;
-                           case "화":
-                               break;
-                           case "수":
-                               break;
-                           case "목":
-                               break;
-                           case "금":
-                               break;
-                           case "토":
-                               break;
+                                break;
+                            case "월":
+                                break;
+                            case "화":
+                                break;
+                            case "수":
+                                break;
+                            case "목":
+                                break;
+                            case "금":
+                                break;
+                            case "토":
+                                break;
 
 
-                       }
-                   }
+                        }
+                    }
 
-               }else{ //매달
+                }else{ //매달
                     monthList = Arrays.asList(habit.getCycle().split(" "));
-                   Log.d(TAG, "onCreateView: monthList"+monthList);
-                   for(int j = 0; j<monthList.size(); j++){
+                    Log.d(TAG, "onCreateView: monthList"+monthList);
+                    for(int j = 0; j<monthList.size(); j++){
 
-                   }
-               }
+                    }
+                }
             }
         });
 
 
         init();
+        initData();
         initAdapter();
-      initLr();
-      addDb();
+        initLr();
+        addDb();
         return view;
     }
 
@@ -158,13 +159,14 @@ public class MyHabitFragment extends Fragment implements InitSetting {
                 }
             }
         });
-}
+    }
 
 
     @Override
     public void initData() {
+        mcView.setSelectedDate(cal);
         mcView.setCurrentDate(new Date(System.currentTimeMillis()));
-        mcView.setDateSelected(new Date(System.currentTimeMillis()),false);
+        //mcView.setDateSelected(new Date(System.currentTimeMillis()),false);
         mcView.addDecorators(new SundayDecorator());
     }
     public void addDb(){

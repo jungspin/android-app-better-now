@@ -19,10 +19,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Better">
+        <activity android:name=".view.diary.UpdateDiaryActivity"></activity>
         <activity
             android:name=".view.mypage.CheckMyHabitActivity"
             android:exported="true" />
-        <activity android:name=".view.diary.DetailDiaryActivity"></activity>
+        <activity android:name=".view.diary.DetailDiaryActivity" />
         <activity android:name=".view.HomeActivity" />
         <activity
             android:name=".view.calender.SelectDateActivity"
@@ -46,7 +47,7 @@
         <activity
             android:name=".view.calender.ShowScheduleActivity"
             android:theme="@style/Theme.mDialog" />
-        <activity android:name=".view.status.StatusDetailActivity" />
+        <activity android:name=".view.habit.AddHabitActivity2" />
         <activity android:name=".view.LoadingActivity" />
         <activity android:name=".view.LoginActivity">
             <intent-filter>

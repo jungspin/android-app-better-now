@@ -43,6 +43,7 @@ public class DiaryController {
             })
             .addOnFailureListener(runnable -> {
                 Log.d(TAG, "insertDiary: fail");
+                runnable.printStackTrace();
                 Toast.makeText(mContext, "일기 등록에 실패했습니다", Toast.LENGTH_SHORT).show();
             });
     }
@@ -51,10 +52,10 @@ public class DiaryController {
         db.collection("diary")
                 .get()
                 .addOnCompleteListener(runnable -> {
-                    Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
+                    //Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
                     if(runnable.isSuccessful()){
                         for (QueryDocumentSnapshot document : runnable.getResult()){
-                            Log.d(TAG, "findAllDiary: " + document.getId() + " => " + document.getData());
+                            //Log.d(TAG, "findAllDiary: " + document.getId() + " => " + document.getData());
                         }
                     }
                 })
@@ -70,8 +71,8 @@ public class DiaryController {
                 .addOnCompleteListener(runnable -> {
                     Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
                     Diary newDiary = runnable.getResult().toObjects(Diary.class).get(0);
-                    Log.d(TAG, "findAllDiary: success:  " + newDiary.toString());
-                    Log.d(TAG, "findAllDiary: success:  " + newDiary.getContent());
+                    //Log.d(TAG, "findAllDiary: success:  " + newDiary.toString());
+                    //Log.d(TAG, "findAllDiary: success:  " + newDiary.getContent());
 
                 })
                 .addOnFailureListener(runnable -> {

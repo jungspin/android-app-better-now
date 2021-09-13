@@ -23,6 +23,7 @@ import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 import com.cos.better.view.calender.decorator.DefaultDecorator;
+import com.cos.better.view.calender.decorator.DiaryDecorator;
 import com.cos.better.view.calender.decorator.EventDecorator;
 import com.cos.better.view.calender.decorator.TestDecorator;
 import com.cos.better.view.calender.decorator.TodayDecorator;
@@ -47,10 +48,10 @@ public class CalenderFragment extends Fragment implements InitSetting {
     private View view;
 
     private MaterialCalendarView calendarView;
-    private SwipeRefreshLayout swipeLy;
+
 
     CustomDate customDate = new CustomDate();
-    private CalenderDayDTO dayDTO;
+    //private CalenderDayDTO dayDTO;
     private ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
     private DiaryListViewModel vm;
     private CalenderDayListViewModel cdvm;
@@ -87,7 +88,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
         init();
         initLr();
         initSetting();
-        initData();
+
         //calendarView.setSelectionMode(MaterialCalendarView.SELECTION_MODE_RANGE);
         return view;
     }
@@ -95,13 +96,14 @@ public class CalenderFragment extends Fragment implements InitSetting {
     @Override
     public void onResume() {
         super.onResume();
+        initData();
 
     }
 
     @Override
     public void init() {
         calendarView = view.findViewById(R.id.calendarView);
-        swipeLy = view.findViewById(R.id.swipeLy);
+
 
     }
 
@@ -112,18 +114,19 @@ public class CalenderFragment extends Fragment implements InitSetting {
             cal.set(date.getYear(), date.getMonth(), date.getDay());
             month = cal.get(Calendar.MONTH)+1;
 
-            dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
+            //dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
             customDate.setYear(cal.get(Calendar.YEAR));
             customDate.setMonth(month);
             customDate.setDay(cal.get(Calendar.DAY_OF_MONTH));
 
             today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
-            Log.d(TAG, "initLr: selectedDate dayDTO : " + customDate.toString());
+            Log.d(TAG, "initLr: today : " + today);
 
             //CalendarDay.from(2021, 8, 25);
 
             Intent intent = new Intent(mContext, ShowScheduleActivity.class);
             intent.putExtra("date", customDate);
+            Log.d(TAG, "initLr: date : " + customDate.toString());
             startActivity(intent);
         });
 
@@ -133,12 +136,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     @Override
     public void initSetting() {
-        swipeLy.setColorSchemeResources(R.color.brown);
-        swipeLy.setOnRefreshListener(() -> {
-            Log.d(TAG, "onRefresh: ");
-            initData();
-            swipeLy.setRefreshing(false);
-        });
+
 
         vm = new ViewModelProvider((HomeActivity)mContext).get(DiaryListViewModel.class);
         cdvm = new ViewModelProvider((HomeActivity)mContext).get(CalenderDayListViewModel.class);
@@ -166,7 +164,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
                 }
                 List<CalendarDay> newList = deleteDup(calendarDayList);
                 Log.d(TAG, "initData getDiaryList: " + newList.size());
-                calendarView.addDecorators(new EventDecorator(mContext, newList));
+                calendarView.addDecorators(new DiaryDecorator(mContext, newList));
             } else {
                 Log.d(TAG, "initData: 데이터 없음");
             }

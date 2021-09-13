@@ -46,6 +46,7 @@ public class CalendarScheduleAdapter extends RecyclerView.Adapter<CalendarSchedu
     public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         LayoutInflater layoutInflater = (LayoutInflater) parent.getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.calendar_schedule_item, parent, false);
+
         return new MyViewHolder(view);
     }
 
@@ -83,7 +84,7 @@ public class CalendarScheduleAdapter extends RecyclerView.Adapter<CalendarSchedu
         public void setItem(CalenderDTO calenderDTO){
 
 
-            SimpleDateFormat sdf = new SimpleDateFormat("hh시 mm분");
+            SimpleDateFormat sdf = new SimpleDateFormat("HH시 mm분");
             String startDate = sdf.format(calenderDTO.getStartDate());
             String endDate = sdf.format(calenderDTO.getEndDate());
 

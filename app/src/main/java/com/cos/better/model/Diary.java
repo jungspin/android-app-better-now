@@ -23,9 +23,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Diary implements Serializable {
     private CalendarDay today;
+    private String id;
     private String title;
     private String content;
     private String user;
-    private Timestamp created;
-    private Timestamp updated;
 }

@@ -3,12 +3,16 @@ package com.cos.better.view.diary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.text.Html;
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,6 +20,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.cos.better.config.BitmapConverter;
 import com.cos.better.config.InitSetting;
 import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.model.Diary;
@@ -42,11 +47,12 @@ public class DiaryFragment extends Fragment implements InitSetting {
     private View view;
 
     private MaterialCalendarView calendarView;
-    private MaterialTextView mtvToday, mtvContent;
-    private Button btnLinkWrite;
-    private ImageView ivPhoto;
+    private MaterialTextView mtvToday, mtvTitle;
+    private Button btnLinkWrite, btnLinkUpdate, btnDelete;
 
-    DiaryViewModel vm;
+
+    private DiaryViewModel vm;
+    private Diary diary;
 
 
     @Override
@@ -62,24 +68,15 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
     }
 
-
-
     private CalenderDayDTO dayDTO;
     Calendar cal = Calendar.getInstance();
     int month = cal.get(Calendar.MONTH)+1;
-
-
-
-
 
     // 화면 넘어올 때 해당 데이터 있으면 화면에 뿌려야하고, 없으면 아래와 같이
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.fragment_diary, container, false);
-
-
-
 
         init();
         initLr();
@@ -93,8 +90,6 @@ public class DiaryFragment extends Fragment implements InitSetting {
         super.onResume();
         initData();
         // 다른 탭 갔다오면 무조건 새로고침 됨 -> 결국 오늘 날짜로 돌아오는 거니 이상하진 않을듯
-
-
     }
 
     @Override
@@ -102,8 +97,10 @@ public class DiaryFragment extends Fragment implements InitSetting {
         mtvToday = view.findViewById(R.id.mtvToday);
         calendarView = view.findViewById(R.id.calendarView);
         btnLinkWrite = view.findViewById(R.id.btnLinkWrite);
-        mtvContent = view.findViewById(R.id.mtvToday);
-        ivPhoto = view.findViewById(R.id.ivPhoto);
+        mtvTitle = view.findViewById(R.id.mtvTitle);
+
+        btnLinkUpdate = view.findViewById(R.id.btnLinkUpdate);
+        btnDelete = view.findViewById(R.id.btnDelete);
     }
 
     @Override
@@ -114,7 +111,8 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
             dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
             Log.d(TAG, "initLr: selectedDate dayDTO : " + dayDTO.toString());
-            vm.findOne(CalendarDay.from(dayDTO.getYear(), (dayDTO.getMonth()-1), dayDTO.getDay()));
+            //vm.findOne(CalendarDay.from(dayDTO.getYear(), (dayDTO.getMonth()-1), dayDTO.getDay()));
+            vm.findOne(CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)));
 
         });
 
@@ -124,11 +122,27 @@ public class DiaryFragment extends Fragment implements InitSetting {
             startActivity(intent);
         });
 
+        btnLinkUpdate.setOnClickListener(v->{
+            //Log.d(TAG, "btnLinkUpdate: " + diary.getTitle());
+            Intent intent = new Intent(mContext, UpdateDiaryActivity.class);
+            intent.putExtra("today", CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)));
+            //Log.d(TAG, "btnLinkUpdate: " + CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)));
+            startActivity(intent);
+        });
+
+        btnDelete.setOnClickListener(v->{
+            vm.deleteDiary(mContext, diary.getId());
+            btnLinkUpdate.setVisibility(View.INVISIBLE);
+            btnDelete.setVisibility(View.INVISIBLE);
+            vm.findOne(CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)));
+        });
+
     }
 
     @Override
     public void initSetting() {
-        ivPhoto.setVisibility(View.INVISIBLE);
+
+
         calendarView.setSelectedDate(cal);
 
         // 처음 앱 실행시 Calender
@@ -137,9 +151,6 @@ public class DiaryFragment extends Fragment implements InitSetting {
 
         vm = new ViewModelProvider((HomeActivity)mContext).get(DiaryViewModel.class);
 
-
-
-
     }
 
     @Override
@@ -147,16 +158,24 @@ public class DiaryFragment extends Fragment implements InitSetting {
         // 얘네 리스너에도 있어야함
         vm.findOne(CalendarDay.from(dayDTO.getYear(), (dayDTO.getMonth()-1), dayDTO.getDay()));
         vm.getDiary().observe((HomeActivity)mContext, data ->{
-            if (data == null){
+            if (data == null){ // 데이터 없음
                 Log.d(TAG, "initData: null " );
                 mtvToday.setText(month + "월 " + cal.get(Calendar.DAY_OF_MONTH) + "일" + "은 어땠나요?");
-                ivPhoto.setVisibility(View.INVISIBLE);
+                //ivPhoto.setVisibility(View.INVISIBLE);
                 btnLinkWrite.setVisibility(View.VISIBLE);
+                mtvTitle.setVisibility(View.INVISIBLE);
+                btnLinkUpdate.setVisibility(View.INVISIBLE);
+                btnDelete.setVisibility(View.INVISIBLE);
+
             } else {
-                Log.d(TAG, "initData: " + data.getToday());
-                mtvToday.setText(data.getContent());
-                ivPhoto.setVisibility(View.VISIBLE);
+                diary = data;
+                mtvTitle.setText(data.getTitle());
+                mtvToday.setText(Html.fromHtml(data.getContent()));
+
+                mtvTitle.setVisibility(View.VISIBLE);
                 btnLinkWrite.setVisibility(View.INVISIBLE);
+                btnLinkUpdate.setVisibility(View.VISIBLE);
+                btnDelete.setVisibility(View.VISIBLE);
             }
 
         });

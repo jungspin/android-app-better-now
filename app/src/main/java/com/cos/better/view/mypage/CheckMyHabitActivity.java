@@ -13,6 +13,7 @@ import com.cos.better.config.InitSetting;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.button.MaterialButton;
+import com.google.android.material.textfield.MaterialAutoCompleteTextView;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
 import com.google.firebase.firestore.DocumentReference;
@@ -28,8 +29,10 @@ public class CheckMyHabitActivity extends AppCompatActivity implements InitSetti
     private MaterialButton btnComplete;
     private TextInputEditText etHabitMemo;
     private FirebaseFirestore db;
-    private String habitMemo;
+    private String habitMemo,title;
+    private MaterialAutoCompleteTextView tvTitle;
     private boolean isChecked;
+
     private Map<String, Object> checkHabit = new HashMap<>();
 
 
@@ -49,6 +52,7 @@ public class CheckMyHabitActivity extends AppCompatActivity implements InitSetti
         ivCancel = findViewById(R.id.ivCancel);
         btnComplete = findViewById(R.id.btnComplete);
         etHabitMemo = findViewById(R.id.etHabitMemo);
+        tvTitle = findViewById(R.id.tvTitle);
     }
 
     @Override
@@ -58,7 +62,7 @@ public class CheckMyHabitActivity extends AppCompatActivity implements InitSetti
         });
         btnComplete.setOnClickListener(v ->{
             isChecked = true;
-           // Intent intent = new Intent()
+            // Intent intent = new Intent()
 
             finish();
 
@@ -67,7 +71,9 @@ public class CheckMyHabitActivity extends AppCompatActivity implements InitSetti
 
     @Override
     public void initData() {
-        habitMemo = etHabitMemo.getText().toString();
+        Intent intent = getIntent();
+        title = intent.getStringExtra("habitTitle");
+        tvTitle.setText(title);
     }
     public void addDB(){
         db = FirebaseFirestore.getInstance();

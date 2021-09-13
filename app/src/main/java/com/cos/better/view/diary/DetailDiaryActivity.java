@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModelProvider;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
@@ -15,11 +16,14 @@ import com.cos.better.R;
 import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
 import com.cos.better.model.Diary;
+import com.cos.better.view.HomeActivity;
 import com.cos.better.viewModel.DiaryViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
+
+import java.util.Calendar;
 
 public class DetailDiaryActivity extends AppCompatActivity implements InitSetting {
 
@@ -27,8 +31,9 @@ public class DetailDiaryActivity extends AppCompatActivity implements InitSettin
 
     private Context mContext = DetailDiaryActivity.this;
     private TextView tvTitle, tvContent;
-    private ImageView ivPhoto, ivCancel, ivDelete;
+    private ImageView ivCancel, ivDelete, ivLinkUpdate;
     private DiaryViewModel vm;
+    private Diary diary;
 
     @Override
     public Intent getIntent() {
@@ -43,6 +48,12 @@ public class DetailDiaryActivity extends AppCompatActivity implements InitSettin
         init();
         initLr();
         initSetting();
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         initData();
     }
 
@@ -50,9 +61,9 @@ public class DetailDiaryActivity extends AppCompatActivity implements InitSettin
     public void init() {
         tvTitle = findViewById(R.id.tvTitle);
         tvContent = findViewById(R.id.tvContent);
-        ivPhoto = findViewById(R.id.ivPhoto);
         ivCancel = findViewById(R.id.ivCancel);
         ivDelete = findViewById(R.id.ivDelete);
+        ivLinkUpdate = findViewById(R.id.ivLinkUpdate);
 
     }
 
@@ -62,6 +73,18 @@ public class DetailDiaryActivity extends AppCompatActivity implements InitSettin
         ivCancel.setOnClickListener(v->{
             finish();
         });
+        ivLinkUpdate.setOnClickListener(v->{
+            CustomDate date = (CustomDate) getIntent().getSerializableExtra("date");
+            //Log.d(TAG, "ivLinkUpdate: " + CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()));
+            Intent intent = new Intent(mContext, UpdateDiaryActivity.class);
+            intent.putExtra("today", CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()));
+            startActivity(intent);
+        });
+
+        ivDelete.setOnClickListener(v->{
+            vm.deleteDiary(mContext, diary.getId());
+            finish();
+        });
 
     }
 
@@ -69,45 +92,28 @@ public class DetailDiaryActivity extends AppCompatActivity implements InitSettin
     public void initSetting() {
         vm = new ViewModelProvider((DetailDiaryActivity)mContext).get(DiaryViewModel.class);
         CustomDate date = (CustomDate) getIntent().getSerializableExtra("date");
-        Log.d(TAG, "initSetting: " + date.toString());
-        findOne(CalendarDay.from(date.getYear(), (date.getMonth()), date.getDay()));
+        Log.d(TAG, "initSetting 넘어온 데이터 : " + date.toString());
+        //findOne(CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()));
         Log.d(TAG, "initSetting: " + CalendarDay.from(date.getYear(), date.getMonth(), date.getDay()));
 
     }
 
     @Override
     public void initData() {
+        CustomDate date = (CustomDate) getIntent().getSerializableExtra("date");
+        vm.findOne(CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()));
+        vm.getDiary().observe((DetailDiaryActivity)mContext, data ->{
+            if (data == null){
+                Log.d(TAG, "initData: null " );
+            } else {
+                diary = data;
+                Log.d(TAG, "initData: " + data.getToday());
+                tvTitle.setText(data.getTitle());
+                tvContent.setText(Html.fromHtml(data.getContent()));
+            }
+
+        });
 
     }
 
-    private void findOne(CalendarDay today){ // 사실은 한건이 아님. 몇건일지 모름
-        FirebaseFirestore db = FirebaseFirestore.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        db.collection("diary")
-                .whereEqualTo("today", today).whereEqualTo("user", user.getEmail()) // 쿼리는 이런식으로 작성하면 될듯
-                .get()
-                .addOnCompleteListener(runnable -> {
-                    if (runnable.getResult().size() == 0){
-                        Log.d(TAG, "findOne: 데이터 없음");
-                        //card.setVisibility(View.INVISIBLE);
-                    } else {
-                        Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
-                        Diary newDiary = runnable.getResult().toObjects(Diary.class).get(0);
-                        Log.d(TAG, "findAllDiary: success:  " + newDiary.toString());
-                        Log.d(TAG, "findAllDiary: success:  " + newDiary.getContent());
-                        tvTitle.setText(newDiary.getTitle());
-                        tvContent.setText(newDiary.getContent());
-
-
-                    }
-
-
-                })
-                .addOnFailureListener(runnable -> {
-                    runnable.printStackTrace();
-                    Log.d(TAG, "findOne: 에러");
-
-                });
-    }
 }

@@ -11,7 +11,7 @@ compileOnly 'org.projectlombok:lombok:1.18.20'
 annotationProcessor 'org.projectlombok:lombok:1.18.20'
 // material-calendarview
 implementation 'com.github.prolificinteractive:material-calendarview:1.4.3'
-// mcalendarview -> 얘네 지우면 오류남..참고
+// mcalendarview 
 implementation 'sun.bob:mcalendarview:1.0.0'
 // cosmocalendar
 implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'
@@ -22,35 +22,6 @@ implementation'in.nashapp.androidsummernote:androidsummernote:1.0.5'
 ```
 
 
-## 데이터베이스 모델링
-
-*1. Diary (일기)
-|컬럼명|타입|예시|설명|
-|------|---|---|---|
-|diary_id|Long|1|PK|
-|diary_title|String|오늘 일기|제목|
-|diary_content|String|재밌었다|내용|
-|diary_url|String|https://camo.githubusercontent.com/a123b2c6011765dd07b9b58e|이미지 경로|
-|created|Timestamp|yyyy-mm-dd HH:mm:ss|등록일|
-|updated|Timestamp|yyyy-mm-dd HH:mm:ss|수정일|
-
-*2. Habit (습관)
-|컬럼명|타입|예시|설명|
-|------|---|---|---|
-|habit_id|Long|1|PK|
-|habit_title|String|식후 30분 내 영양제 복용|습관 이름|
-|habit_time|String|저녁 8시|지정 시간|
-|habit_memo|String|영양제 바꿔야지..|습관에 관한 메모|
-|category|String|생활습관|습관 카테고리|
-|created|Timestamp|yyyy-mm-dd HH:mm:ss|등록일|
-|updated|Timestamp|yyyy-mm-dd HH:mm:ss|수정일|
-
-*3. Calender (일정)
-|컬럼명|타입|예시|설명|
-|------|---|---|---|
-|calender_id|Long|1|PK|
-|calender_title|String|ㅇㅇ이 만나기|일정 내용|
-|calender_time|String|8월 24일 15시|일정 시간|
 
 # 패키지 구조
 ## Android Studio
