@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -19,17 +18,14 @@ import android.view.ViewGroup;
 
 import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
-import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 import com.cos.better.view.calender.decorator.DefaultDecorator;
 import com.cos.better.view.calender.decorator.DiaryDecorator;
 import com.cos.better.view.calender.decorator.EventDecorator;
-import com.cos.better.view.calender.decorator.TestDecorator;
 import com.cos.better.view.calender.decorator.TodayDecorator;
 import com.cos.better.view.calender.decorator.SundayDecorator;
 import com.cos.better.viewModel.CalenderDayListViewModel;
-import com.cos.better.viewModel.CalenderListViewModel;
 import com.cos.better.viewModel.DiaryListViewModel;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
@@ -58,7 +54,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     Calendar cal = Calendar.getInstance();
     int month = cal.get(Calendar.MONTH)+1;
-    CalendarDay today;
+    //CalendarDay today;
 
 
     @Override
@@ -119,8 +115,8 @@ public class CalenderFragment extends Fragment implements InitSetting {
             customDate.setMonth(month);
             customDate.setDay(cal.get(Calendar.DAY_OF_MONTH));
 
-            today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
-            Log.d(TAG, "initLr: today : " + today);
+            //today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
+            //Log.d(TAG, "initLr: today : " + today);
 
             //CalendarDay.from(2021, 8, 25);
 
@@ -137,14 +133,11 @@ public class CalenderFragment extends Fragment implements InitSetting {
     @Override
     public void initSetting() {
 
-
         vm = new ViewModelProvider((HomeActivity)mContext).get(DiaryListViewModel.class);
         cdvm = new ViewModelProvider((HomeActivity)mContext).get(CalenderDayListViewModel.class);
-        calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext)/*,new EventDecorator(mContext, calendarDayList)*/);
 
-        
-        // 처음 앱 실행시 Calender
-        //dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
+        calendarView.addDecorators(new DefaultDecorator(), new SundayDecorator(),new TodayDecorator(mContext));
+
 
         customDate.setYear(cal.get(Calendar.YEAR));
         customDate.setMonth(month);
@@ -168,10 +161,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
             } else {
                 Log.d(TAG, "initData: 데이터 없음");
             }
-          
         });
-        today = CalendarDay.from(customDate.getYear(), customDate.getMonth(), customDate.getDay());
-        Log.d(TAG, "initData customdate: " + today);
 
         cdvm.findAllCalendar();
         cdvm.getMdCldList().observe((HomeActivity)mContext, data ->{
@@ -182,7 +172,6 @@ public class CalenderFragment extends Fragment implements InitSetting {
             } else {
                 Log.d(TAG, "findAllCalendar: 데이터 없음");
             }
-            
         });
 
     }

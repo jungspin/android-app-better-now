@@ -9,9 +9,9 @@ import com.cos.better.model.Diary;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
+
 import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,9 +25,6 @@ public class DiaryListViewModel extends ViewModel {
 
     private MutableLiveData<List<Diary>> diaryList = new MutableLiveData<>();
 
-    public void init(){
-        //diary.setValue();
-    }
 
     public MutableLiveData<List<Diary>> getDiaryList() {
         return diaryList;
@@ -35,8 +32,9 @@ public class DiaryListViewModel extends ViewModel {
 
 
     public void findAllDiary(){
-
-        db.collection("diary").whereEqualTo("user", user.getEmail())
+        Log.d(TAG, "findAllDiary: ");
+        db.collection("diary")
+                .whereEqualTo("user", user.getProviderId()+user.getUid())
                 .get()
                 .addOnCompleteListener(runnable -> {
                     Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
@@ -52,6 +50,7 @@ public class DiaryListViewModel extends ViewModel {
                         diaryList.setValue(diaries);
                     } else {
                         Log.d(TAG, "findAllDiary: 데이터 없음");
+                        diaryList.setValue(null);
                     }
                 })
                 .addOnFailureListener(runnable -> {

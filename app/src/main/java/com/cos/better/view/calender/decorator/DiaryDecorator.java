@@ -26,20 +26,15 @@ public class DiaryDecorator implements DayViewDecorator {
       drawable = mContext.getResources().getDrawable(R.color.brown);
 
         this.dates = new HashSet<>(dates);
-
     }
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-
-
         return dates.contains(day);
     }
 
     @Override
     public void decorate(DayViewFacade view) {
-        //view.setSelectionDrawable(drawable);
         view.addSpan(new ForegroundColorSpan(Color.rgb(44, 107, 178)));
-        //view.setSelectionDrawable(drawable);
     }
 }

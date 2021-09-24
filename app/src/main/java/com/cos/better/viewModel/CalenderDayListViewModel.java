@@ -27,40 +27,37 @@ public class CalenderDayListViewModel extends ViewModel {
 
     private MutableLiveData<List<CalendarDay>> mdCldList = new MutableLiveData<>();
 
-    public void init(){
-        //diary.setValue();
-    }
 
     public MutableLiveData<List<CalendarDay>> getMdCldList() {
         return mdCldList;
     }
 
 
- public void findAllCalendar(){
-     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        ref.whereEqualTo("user", user.getEmail())
-            .get()
-            .addOnCompleteListener(task -> {
-                if(task.getResult().size() != 0) {
-                    List<CalendarDay> calendarDays = new ArrayList<>();
-                    for(DocumentSnapshot doc : task.getResult()){
-                        //Log.d(TAG, "findAllCalendar: " + doc.getId() + " => " + doc.getData());
-                        CalenderDTO calenderDTO = doc.toObject(CalenderDTO.class);
-                        //Log.d(TAG, "findAllCalendar: calenderDTO: " + calenderDTO.getCalendarDayList());
-                        for(int i=0; i<calenderDTO.getCalendarDayList().size();i++){
-                            calendarDays.add(calenderDTO.getCalendarDayList().get(i));
+     public void findAllCalendar(){
+         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            ref.whereEqualTo("user", user.getProviderId()+user.getUid())
+                .get()
+                .addOnCompleteListener(task -> {
+                    if(task.getResult().size() != 0) {
+                        List<CalendarDay> calendarDays = new ArrayList<>();
+                        for(DocumentSnapshot doc : task.getResult()){
+                            //Log.d(TAG, "findAllCalendar: " + doc.getId() + " => " + doc.getData());
+                            CalenderDTO calenderDTO = doc.toObject(CalenderDTO.class);
+                            //Log.d(TAG, "findAllCalendar: calenderDTO: " + calenderDTO.getCalendarDayList());
+                            for(int i=0; i<calenderDTO.getCalendarDayList().size();i++){
+                                calendarDays.add(calenderDTO.getCalendarDayList().get(i));
+                            }
                         }
+                        Log.d(TAG, "findAllCalendar: calendarDays: " + calendarDays.size());
+                        mdCldList.setValue(calendarDays);
+                    }else {
+                        mdCldList.setValue(null);
                     }
-                    Log.d(TAG, "findAllCalendar: calendarDays: " + calendarDays.size());
-                    mdCldList.setValue(calendarDays);
-                }else {
-                    mdCldList.setValue(null);
-                }
-            })
-            .addOnFailureListener(e -> {
-                e.printStackTrace();
-            });
-    }
+                })
+                .addOnFailureListener(e -> {
+                    e.printStackTrace();
+                });
+        }
 
 
 

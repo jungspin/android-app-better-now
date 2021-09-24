@@ -25,7 +25,7 @@ import java.util.Date;
 
 public class HomeActivity extends AppCompatActivity implements InitSetting {
 
-    private static final String TAG = "MainActivity2";
+    private static final String TAG = "HomeActivity";
     private HomeActivity mContext = this;
 
     private FrameLayout fragmentContainer;
@@ -120,6 +120,14 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
 
     private void isLogin(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        Log.d(TAG, "getMetadata: " + user.getMetadata());
+        Log.d(TAG, "getPhotoUrl: " + user.getPhotoUrl());
+        Log.d(TAG, "getIdToken(true): " + user.getIdToken(true));
+        Log.d(TAG, "getDisplayName: " + user.getDisplayName());
+        Log.d(TAG, "getEmail: " + user.getEmail());
+        Log.d(TAG, "getProviderId: " + user.getProviderId());
+        Log.d(TAG, "getUid: " + user.getUid());
+
         if (user==null){
             Intent intent = new Intent(mContext, LoginActivity.class);
             startActivity(intent);

@@ -17,13 +17,9 @@ import android.view.ViewGroup;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
-import com.cos.better.config.MypageDiaryAdapter;
-import com.cos.better.model.Diary;
+import com.cos.better.adapter.MypageDiaryAdapter;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.viewModel.DiaryListViewModel;
-import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.QueryDocumentSnapshot;
-import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 
 public class MyDiaryFragment extends Fragment implements InitSetting {

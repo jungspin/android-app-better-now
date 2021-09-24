@@ -21,6 +21,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import org.w3c.dom.CDATASection;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class DiaryViewModel extends ViewModel {
@@ -30,10 +31,6 @@ public class DiaryViewModel extends ViewModel {
     FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private MutableLiveData<Diary> diary = new MutableLiveData<>();
-
-    public void init(){
-        //diary.setValue();
-    }
 
     public MutableLiveData<Diary> getDiary() {
         return diary;
@@ -55,19 +52,17 @@ public class DiaryViewModel extends ViewModel {
             });
     }
 
-
-
-
-
-    public void findOne(CalendarDay today){ // 사실은 한건이 아님. 몇건일지 모름
+    public void findOne(CalendarDay today){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         Log.d(TAG, "findOne: " + today);
         db.collection("diary")
-                .whereEqualTo("today", today).whereEqualTo("user", user.getEmail()) // 쿼리는 이런식으로 작성하면 될듯
+                .whereEqualTo("today", today)
+                .whereEqualTo("user", user.getProviderId()+user.getUid())
                 .get()
                 .addOnCompleteListener(runnable -> {
 
                     if (runnable.getResult().size() == 0){
+                        Log.d(TAG, "findOne: null");
                         diary.setValue(null);
                     } else {
                         for(DocumentSnapshot doc : runnable.getResult()){
@@ -78,13 +73,10 @@ public class DiaryViewModel extends ViewModel {
                         }
 
                     }
-
-
                 })
                 .addOnFailureListener(runnable -> {
                     runnable.printStackTrace();
                     Log.d(TAG, "findOne: 에러");
-
                 });
     }
 
@@ -97,7 +89,7 @@ public class DiaryViewModel extends ViewModel {
                 })
                 .addOnFailureListener(runnable -> {
                     Log.d(TAG, "updateDiary: 일기 수정 실패!!!!!! fail");
-                    Log.d(TAG, "updateDiary: " +  runnable.getMessage());
+                    runnable.printStackTrace();
                     Toast.makeText(mContext, "일기 수정에 실패했습니다", Toast.LENGTH_SHORT).show();
                 });
     }

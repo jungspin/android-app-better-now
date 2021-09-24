@@ -23,9 +23,6 @@ public class CalenderViewModel extends ViewModel {
     // 변할 수 있는 데이터
     private MutableLiveData<CalenderDTO> mdCalenderDTO = new MutableLiveData<>();
 
-    public void init(){
-        //diary.setValue();
-    }
 
     public MutableLiveData<CalenderDTO> getCalenderDTO() {
         return mdCalenderDTO;
@@ -46,28 +43,4 @@ public class CalenderViewModel extends ViewModel {
             });
     }
 
-    public void findOneDay(CalendarDay startDate){ // 사실은 한건이 아님. 몇건일지 모름
-        Log.d(TAG, "findOne: " + startDate);
-        db.collection("schedule")
-                .whereEqualTo("startDate", startDate) // 쿼리는 이런식으로 작성하면 될듯
-                .get()
-                .addOnCompleteListener(runnable -> {
-                    if (runnable.getResult().size() == 0){
-                        mdCalenderDTO.setValue(null);
-                    } else {
-                        Log.d(TAG, "findAllDiary: success:  " + runnable.getResult().size());
-                        CalenderDTO calenderDTO = runnable.getResult().toObjects(CalenderDTO.class).get(0);
-                        Log.d(TAG, "findAllDiary: success:  " + calenderDTO.toString());
-                        Log.d(TAG, "findAllDiary: success:  " + calenderDTO.getTitle());
-                        mdCalenderDTO.setValue(calenderDTO);
-                    }
-
-
-                })
-                .addOnFailureListener(runnable -> {
-                    runnable.printStackTrace();
-                    Log.d(TAG, "findOne: 에러");
-
-                });
-    }
 }

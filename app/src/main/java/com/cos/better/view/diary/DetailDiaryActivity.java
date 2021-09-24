@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -16,14 +15,11 @@ import com.cos.better.R;
 import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
 import com.cos.better.model.Diary;
-import com.cos.better.view.HomeActivity;
+
 import com.cos.better.viewModel.DiaryViewModel;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import java.util.Calendar;
 
 public class DetailDiaryActivity extends AppCompatActivity implements InitSetting {
 

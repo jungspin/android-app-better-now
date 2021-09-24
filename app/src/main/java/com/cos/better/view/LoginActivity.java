@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.airbnb.lottie.Lottie;
 import com.cos.better.R;
@@ -44,15 +45,8 @@ public class LoginActivity extends AppCompatActivity  {
         //createSignInIntent();
 
         setContentView(R.layout.activity_login);
-
-
         showProgressDialog();
-            login();
-
-
-
-
-
+        login();
     }
 
     private void showProgressDialog(){
@@ -60,52 +54,30 @@ public class LoginActivity extends AppCompatActivity  {
                 show(getSupportFragmentManager(),"");
     }
 
-
-
     // [START auth_fui_result]
     private void onSignInResult(FirebaseAuthUIAuthenticationResult result) {
         IdpResponse response = result.getIdpResponse();
         if (result.getResultCode() == RESULT_OK) {
             // Successfully signed in
             FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//            Log.d(TAG, "getMetadata: " + user.getMetadata());
-//            Log.d(TAG, "getPhotoUrl: " + user.getPhotoUrl());
-//            Log.d(TAG, "getIdToken(true): " + user.getIdToken(true));
-//            Log.d(TAG, "getDisplayName: " + user.getDisplayName());
-//            Log.d(TAG, "getEmail: " + user.getEmail());
-//            Log.d(TAG, "getProviderId: " + user.getProviderId());
-//            Log.d(TAG, "getUid: " + user.getUid());
+            Log.d(TAG, "getMetadata: " + user.getMetadata());
+            Log.d(TAG, "getPhotoUrl: " + user.getPhotoUrl());
+            Log.d(TAG, "getIdToken(true): " + user.getIdToken(true));
+            Log.d(TAG, "getDisplayName: " + user.getDisplayName());
+            Log.d(TAG, "getEmail: " + user.getEmail());
+            Log.d(TAG, "getProviderId: " + user.getProviderId());
+            Log.d(TAG, "getUid: " + user.getUid());
 
 
             Intent intent = new Intent(mContext, HomeActivity.class);
             startActivity(intent);
             finish();
         } else {
+            Toast.makeText(mContext, "로그인 하셔야 앱을 사용할 수 있어요", Toast.LENGTH_SHORT).show();
             Log.d(TAG, "onSignInResult: 로그인 실패 : " + response.getError());
         }
     }
     // [END auth_fui_result]
-
-    public void signOut() {
-        // [START auth_fui_signout]
-        AuthUI.getInstance()
-                .signOut(this)
-                .addOnCompleteListener(task -> {
-                    Log.d(TAG, "signOut: ");
-                });
-        // [END auth_fui_signout]
-    }
-
-    public void delete() {
-        // [START auth_fui_delete]
-        AuthUI.getInstance()
-                .delete(this)
-                .addOnCompleteListener(task -> {
-                    Log.d(TAG, "delete: ");
-                });
-        // [END auth_fui_delete]
-    }
-
 
     public void login() {
         // [START auth_fui_create_intent]
@@ -125,10 +97,6 @@ public class LoginActivity extends AppCompatActivity  {
         signInLauncher.launch(signInIntent);
         // [END auth_fui_create_intent]
     }
-
-
-
-
 
 
 }

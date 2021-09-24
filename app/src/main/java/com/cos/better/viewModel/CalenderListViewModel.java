@@ -27,21 +27,16 @@ public class CalenderListViewModel extends ViewModel {
 
     private MutableLiveData<List<CalenderDTO>> mdCalenderList = new MutableLiveData<>();
 
-    public void init(){
-        //diary.setValue();
-    }
-
     public MutableLiveData<List<CalenderDTO>> getMdCalenderList() {
         return mdCalenderList;
     }
-
-
 
     public void findSelected(CalendarDay today){
         Log.d(TAG, "findAllSchedule: today : " + today.getDate());
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
-        ref.whereArrayContains("calendarDayList", today).whereEqualTo("user", user.getEmail())
+        ref.whereArrayContains("calendarDayList", today)
+                .whereEqualTo("user", user.getProviderId()+user.getUid())
                 .get()
                 .addOnCompleteListener(task -> {
                     if (task.getResult().size() != 0){

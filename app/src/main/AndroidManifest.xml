@@ -25,15 +25,11 @@
             android:exported="true" />
         <activity android:name=".view.diary.DetailDiaryActivity" />
         <activity android:name=".view.HomeActivity" />
-        <activity
-            android:name=".view.calender.SelectDateActivity"
-            android:theme="@android:style/Theme.DeviceDefault.Light.Dialog.NoActionBar" />
         <activity android:name=".view.calender.AddScheduleActivity" />
         <activity android:name=".view.status.StatusDetailActivity" />
         <activity
             android:name=".view.status.StatusActivity"
             android:exported="true" />
-        <activity android:name=".view.diary.IntentTestActivity" />
         <activity
             android:name=".view.status.habit.HabitStatus"
             android:exported="true" />
@@ -48,7 +44,6 @@
             android:name=".view.calender.ShowScheduleActivity"
             android:theme="@style/Theme.mDialog" />
         <activity android:name=".view.habit.AddHabitActivity2" />
-        <activity android:name=".view.LoadingActivity" />
         <activity android:name=".view.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -66,14 +61,6 @@
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
         </provider>
-
-        <service
-            android:name=".config.MyFirebaseMessagingService"
-            android:exported="false">
-            <intent-filter>
-                <action android:name="com.google.firebase.MESSAGING_EVENT" />
-            </intent-filter>
-        </service>
 
         <receiver
             android:name=".config.AlarmReceiver"

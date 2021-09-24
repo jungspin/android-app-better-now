@@ -1,16 +1,15 @@
 package com.cos.better.view.calender;
 
-import android.app.Activity;
-import android.app.ActivityOptions;
+
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
-import android.widget.ScrollView;
+
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResultLauncher;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.lifecycle.ViewModelProvider;
@@ -18,24 +17,21 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.cos.better.R;
-import com.cos.better.config.CalendarScheduleAdapter;
+import com.cos.better.adapter.CalendarScheduleAdapter;
 import com.cos.better.config.CustomDate;
 import com.cos.better.config.InitSetting;
-import com.cos.better.dto.CalenderDayDTO;
-import com.cos.better.model.Diary;
+
 import com.cos.better.view.diary.DetailDiaryActivity;
 import com.cos.better.viewModel.CalenderListViewModel;
 import com.cos.better.viewModel.DiaryListViewModel;
 import com.cos.better.viewModel.DiaryViewModel;
 import com.google.android.material.card.MaterialCardView;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.firestore.FirebaseFirestore;
+
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
 import java.text.SimpleDateFormat;
 
-// 이후 이름 수정해야함!!!! + xml 도 마찬가지
+
 public class ShowScheduleActivity extends AppCompatActivity implements InitSetting {
 
     private static final String TAG = "ShowScheduleActivity";
@@ -154,7 +150,8 @@ public class ShowScheduleActivity extends AppCompatActivity implements InitSetti
         });
 
         // 일기 리스트
-        dvm.findOne(CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay()));
+        CalendarDay calendarDay = CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay());
+        dvm.findOne(calendarDay);
         dvm.getDiary().observe((ShowScheduleActivity)mContext, data ->{
             if (data == null){
                 Log.d(TAG, "initData: null " );

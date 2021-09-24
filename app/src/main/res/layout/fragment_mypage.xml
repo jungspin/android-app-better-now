@@ -9,6 +9,17 @@
     android:background="@color/beige"
     tools:context=".view.mypage.MypageFragment">
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabLogout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_logout"
+        app:tint="@color/brown"
+        android:layout_gravity="right"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="10dp"/>
+
+
 
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"

@@ -94,20 +94,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
-            <ImageView
-                android:id="@+id/ivHeading1"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="12dp"
-                android:background="@drawable/ic_textsize_bigger"
-                app:layout_constraintStart_toEndOf="@+id/ivHeading"
-                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/ivHeading"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/ic_textsize"
+                app:layout_constraintStart_toEndOf="@+id/ivHeading1"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/ivHeading1"
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:background="@drawable/ic_textsize_bigger"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -115,16 +116,16 @@
                 android:id="@+id/ivBullet"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/ic_bullet"
-                app:layout_constraintStart_toEndOf="@+id/ivHeading1"
+                app:layout_constraintStart_toEndOf="@+id/ivHeading"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/ivQuote"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="12dp"
+                android:layout_marginStart="8dp"
                 android:background="@drawable/ic_quote"
                 app:layout_constraintStart_toEndOf="@+id/ivBullet"
                 app:layout_constraintTop_toTopOf="parent" />

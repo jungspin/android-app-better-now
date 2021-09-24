@@ -10,6 +10,7 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import java.io.Serializable;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.Date;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

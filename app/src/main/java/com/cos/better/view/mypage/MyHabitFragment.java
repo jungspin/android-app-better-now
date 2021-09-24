@@ -14,8 +14,6 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
-import android.widget.ToggleButton;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
@@ -23,8 +21,7 @@ import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.dto.HabitDto;
 import com.cos.better.model.Habit;
 import com.cos.better.view.calender.decorator.SundayDecorator;
-import com.cos.better.view.mypage.adapter.MyHabitAdapter;
-import com.cos.better.view.status.adapter.StatusAdapter;
+import com.cos.better.adapter.MyHabitAdapter;
 import com.cos.better.viewModel.HabitViewModel;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;

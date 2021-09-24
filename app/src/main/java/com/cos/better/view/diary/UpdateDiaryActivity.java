@@ -5,17 +5,16 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.Bundle;
-import android.text.Html;
+
 import android.util.Log;
-import android.view.View;
+
 import android.widget.ImageView;
 
 import com.cos.better.R;
 import com.cos.better.config.InitSetting;
-import com.cos.better.dto.CalenderDayDTO;
+
 import com.cos.better.model.Diary;
 import com.cos.better.viewModel.DiaryViewModel;
 import com.google.android.material.textfield.TextInputEditText;
@@ -23,8 +22,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 
-import java.io.InputStream;
-import java.util.Calendar;
+
 
 import jp.wasabeef.richeditor.RichEditor;
 
@@ -50,8 +48,6 @@ public class UpdateDiaryActivity extends AppCompatActivity implements InitSettin
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_update_diary);
-
-
 
         init();
         initLr();
@@ -87,7 +83,6 @@ public class UpdateDiaryActivity extends AppCompatActivity implements InitSettin
                     .title(tfTitle.getText().toString())
                     .content(mEditor.getHtml())
                     .user(diary.getUser())
-                    //.bitmap(BitmapConverter.BitmapToString(bitmap))
                     .build();
             Log.d(TAG, "ivSave: " + diary.getId());
             Log.d(TAG, "ivSave: " + diary.getTitle());
@@ -96,10 +91,6 @@ public class UpdateDiaryActivity extends AppCompatActivity implements InitSettin
             finish();
 
         });
-
-
-
-
     }
 
     @Override
@@ -156,10 +147,6 @@ public class UpdateDiaryActivity extends AppCompatActivity implements InitSettin
             }
         });
 
-
-
     }
-
-
 
 }

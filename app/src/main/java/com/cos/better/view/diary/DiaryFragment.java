@@ -3,8 +3,7 @@ package com.cos.better.view.diary;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -12,26 +11,22 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.text.Html;
-import android.util.Base64;
+
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.ImageView;
 
-import com.cos.better.config.BitmapConverter;
 import com.cos.better.config.InitSetting;
 import com.cos.better.dto.CalenderDayDTO;
 import com.cos.better.model.Diary;
 import com.cos.better.view.HomeActivity;
 import com.cos.better.R;
 
-import com.cos.better.view.calender.ShowScheduleActivity;
-import com.cos.better.viewModel.DiaryController;
+
 import com.cos.better.viewModel.DiaryViewModel;
 import com.google.android.material.textview.MaterialTextView;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 
@@ -112,7 +107,8 @@ public class DiaryFragment extends Fragment implements InitSetting {
             dayDTO = CalenderDayDTO.builder().year(cal.get(Calendar.YEAR)).month(month).day(cal.get(Calendar.DAY_OF_MONTH)).build();
             Log.d(TAG, "initLr: selectedDate dayDTO : " + dayDTO.toString());
             //vm.findOne(CalendarDay.from(dayDTO.getYear(), (dayDTO.getMonth()-1), dayDTO.getDay()));
-            vm.findOne(CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)));
+            CalendarDay calendarDay = CalendarDay.from(date.getYear(), (date.getMonth()-1), date.getDay());
+            vm.findOne(calendarDay);
 
         });
 
@@ -134,7 +130,9 @@ public class DiaryFragment extends Fragment implements InitSetting {
             vm.deleteDiary(mContext, diary.getId());
             btnLinkUpdate.setVisibility(View.INVISIBLE);
             btnDelete.setVisibility(View.INVISIBLE);
-            vm.findOne(CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH)));
+
+            CalendarDay calendarDay = CalendarDay.from(cal.get(Calendar.YEAR), cal.get(Calendar.MONTH), cal.get(Calendar.DAY_OF_MONTH));
+            vm.findOne(calendarDay);
         });
 
     }
@@ -156,7 +154,8 @@ public class DiaryFragment extends Fragment implements InitSetting {
     @Override
     public void initData() {
         // 얘네 리스너에도 있어야함
-        vm.findOne(CalendarDay.from(dayDTO.getYear(), (dayDTO.getMonth()-1), dayDTO.getDay()));
+        CalendarDay today = CalendarDay.from(dayDTO.getYear(), (dayDTO.getMonth()-1), dayDTO.getDay());
+        vm.findOne(today);
         vm.getDiary().observe((HomeActivity)mContext, data ->{
             if (data == null){ // 데이터 없음
                 Log.d(TAG, "initData: null " );

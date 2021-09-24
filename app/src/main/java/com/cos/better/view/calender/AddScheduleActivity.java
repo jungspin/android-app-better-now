@@ -33,8 +33,6 @@ import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
 import com.sothree.slidinguppanel.SlidingUpPanelLayout;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -206,15 +204,6 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
             Log.d(TAG, "시작일: " + startDate.toString());
             Log.d(TAG, "종료일: " + endDate.toString());
 
-//            if (isAllDay.isChecked()){ // 하루종일을 체크 해제
-//                Log.d(TAG, "하루종일을 체크: "+ startDate.toString()) ;
-//                Log.d(TAG, "하루종일을 체크: " + endDate.toString());
-//
-//
-//
-//        }
-            //tvStartDate.setText(startDate.getDateString(year, month, day, hour, minute));
-            //tvEndDate.setText(startDate.getDateString(year, month, day, hour, minute));
             Log.d(TAG, "tvStartDate: " +
                     startDate.getDateString(startDate.getYear(), (startDate.getMonth()+1), startDate.getDay(), startDate.getHour(), startDate.getMinute()));
             Log.d(TAG, "tvEndDate: " +
@@ -222,8 +211,6 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
 
             tvStartDate.setText(startDate.getDateString(startDate.getYear(), (startDate.getMonth()+1), startDate.getDay(), startDate.getHour(), startDate.getMinute()));
             tvEndDate.setText(endDate.getDateString(endDate.getYear(), (endDate.getMonth()+1), endDate.getDay(), endDate.getHour(), endDate.getMinute()));
-
-
 
             splAddSchedule.setPanelState(SlidingUpPanelLayout.PanelState.HIDDEN);
 
@@ -262,7 +249,7 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
                     .startDate(start)
                     .calendarDayList(calendarDays)
                     .isAlert(isAlert.isChecked()?true:false)
-                    .user(user.getEmail())
+                    .user(user.getProviderId()+user.getUid())
                     .startCalenderDay(CalendarDay.from(start))
                     .endCalenderDay(CalendarDay.from(end))
                     .endDate(end)
@@ -297,11 +284,21 @@ public class AddScheduleActivity extends AppCompatActivity implements InitSettin
                 tpSelectEndTime.setEnabled(false);
                 endDate.setHour(0);
                 endDate.setMinute(0);
+
+                isAlert.setVisibility(View.INVISIBLE);
+                tvLetMeAlert.setVisibility(View.INVISIBLE);
+
                 // 시간을 임의로 정하나? 아님 아예 안넘기나?
             }
             else {
                 tpSelectStartTime.setEnabled(true);
                 tpSelectEndTime.setEnabled(true);
+
+                isAlert.setVisibility(View.VISIBLE);
+                isAlert.setClickable(true);
+                if (isAlert.isChecked()){
+                    isAlert.setChecked(false);
+                }
             }
         });
 
