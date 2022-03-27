@@ -48,7 +48,7 @@ public class CalenderFragment extends Fragment implements InitSetting {
 
     CustomDate customDate = new CustomDate();
     //private CalenderDayDTO dayDTO;
-    private ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
+    private final ArrayList<CalendarDay> calendarDayList = new ArrayList<>();
     private DiaryListViewModel vm;
     private CalenderDayListViewModel cdvm;
 

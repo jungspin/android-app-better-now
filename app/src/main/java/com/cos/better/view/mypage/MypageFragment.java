@@ -53,9 +53,7 @@ public class MypageFragment extends Fragment implements InitSetting{
 
 
 
-    public MypageFragment(HomeActivity mContext) {
-        // Required empty public constructor
-    }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
@@ -103,7 +101,6 @@ public class MypageFragment extends Fragment implements InitSetting{
     @Override
     public void initLr() {
         fabLogout.setOnClickListener(v->{
-            //user.delete(); // 계정삭제였음 ㅠ
             AuthUI.getInstance().signOut(mContext)
                     .addOnSuccessListener(task -> {
                         Intent intent = new Intent(mContext, LoginActivity.class);

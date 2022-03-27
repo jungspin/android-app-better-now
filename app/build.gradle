@@ -45,7 +45,7 @@ dependencies {
     // lombok : 개발시에만 필요한것
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
-    // mcalendarview -> 이 달력들 지우면 오류남..
+    // mcalendarview
     implementation 'sun.bob:mcalendarview:1.0.0'
     // cosmocalendar
     implementation 'com.github.applikeysolutions:cosmocalendar:1.0.4'

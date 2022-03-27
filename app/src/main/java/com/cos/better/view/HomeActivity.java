@@ -28,7 +28,6 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
     private static final String TAG = "HomeActivity";
     private HomeActivity mContext = this;
 
-    private FrameLayout fragmentContainer;
     private BottomNavigationView bottomNavigation;
 
     //DiaryViewModel vm = new ViewModelProvider(mContext).get(DiaryViewModel.class);
@@ -54,7 +53,7 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
 
     @Override
     public void init() {
-        fragmentContainer = findViewById(R.id.fragmentContainer);
+        FrameLayout fragmentContainer = findViewById(R.id.fragmentContainer);
         bottomNavigation = findViewById(R.id.bottomNavigation);
 
     }
@@ -95,7 +94,7 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
                     selectedFragment = new StatusFragment();
                     break;
                 case R.id.navMypage:
-                    selectedFragment = new MypageFragment(mContext);
+                    selectedFragment = new MypageFragment();
                     break;
 
             }
@@ -120,13 +119,6 @@ public class HomeActivity extends AppCompatActivity implements InitSetting {
 
     private void isLogin(){
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        Log.d(TAG, "getMetadata: " + user.getMetadata());
-        Log.d(TAG, "getPhotoUrl: " + user.getPhotoUrl());
-        Log.d(TAG, "getIdToken(true): " + user.getIdToken(true));
-        Log.d(TAG, "getDisplayName: " + user.getDisplayName());
-        Log.d(TAG, "getEmail: " + user.getEmail());
-        Log.d(TAG, "getProviderId: " + user.getProviderId());
-        Log.d(TAG, "getUid: " + user.getUid());
 
         if (user==null){
             Intent intent = new Intent(mContext, LoginActivity.class);

@@ -28,15 +28,6 @@ public class EventDecorator implements DayViewDecorator {
 
     @Override
     public boolean shouldDecorate(CalendarDay day) {
-        Log.d(TAG, "shouldDecorate: " + dates.size());
-        Log.d(TAG, "shouldDecorate: " + dates);
-
-//        if (day.equals(CalendarDay.today())){
-//            Log.d(TAG, "shouldDecorate: o");
-//        } else {
-//            Log.d(TAG, "shouldDecorate: x");
-//        }
-//        return day.equals(CalendarDay.today());
         return dates.contains(day);
     }
 
